@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MURAQBA — Agency Brand Book 2025</title>
+<meta name="description" content="MURAQBA Digital Marketing Agency — Official Brand Book 2025. Facebook & Instagram Ads, Lead Generation, Brand Management for Clothing Brands.">
+<meta property="og:title" content="MURAQBA — Agency Brand Book">
+<meta property="og:description" content="Results-first digital marketing agency based in Lahore, Pakistan.">
+<meta name="theme-color" content="#1C1A15">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:#F7F0E6;display:flex;height:100vh;overflow:hidden;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:#9D9883;border-radius:3px;}
+
+/* SIDEBAR */
+aside{width:220px;flex-shrink:0;background:#1C1A15;display:flex;flex-direction:column;overflow:hidden;}
+.logo-box{padding:22px 18px 14px;border-bottom:1px solid #2E2B22;}
+.logo-box h1{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:#fff;letter-spacing:0.14em;}
+.logo-box span{font-size:9px;color:#BE8E6F;letter-spacing:0.2em;display:block;margin-top:3px;}
+nav{flex:1;overflow-y:auto;padding:8px 0;}
+.phase-lbl{padding:14px 18px 4px;font-size:8px;font-weight:700;letter-spacing:0.22em;color:rgba(255,255,255,0.2);text-transform:uppercase;}
+.nav-btn{display:block;width:100%;text-align:left;padding:8px 18px;background:transparent;border:none;border-left:2px solid transparent;cursor:pointer;font-size:12px;font-family:'Outfit',sans-serif;color:rgba(255,255,255,0.4);transition:all 0.15s;}
+.nav-btn:hover{color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.04);}
+.nav-btn.active{background:rgba(255,255,255,0.07);border-left-color:#BE8E6F;color:#fff;}
+.sidebar-foot{padding:14px 18px;border-top:1px solid #2E2B22;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.06em;line-height:1.8;}
+
+/* MAIN */
+main{flex:1;overflow-y:auto;padding:44px 52px;background:#F7F0E6;}
+.content{max-width:800px;}
+
+/* TYPOGRAPHY */
+.sec-meta{font-size:10px;font-weight:700;letter-spacing:0.15em;color:#BE8E6F;text-transform:uppercase;margin-bottom:6px;}
+.sec-meta span{color:#8A8370;margin-left:8px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;color:#28251E;line-height:1.1;}
+.accent-bar{width:44px;height:2px;background:#BE8E6F;margin:14px 0 28px;border-radius:1px;}
+h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:#28251E;margin:32px 0 10px;border-bottom:1px solid #E2CCB0;padding-bottom:8px;}
+p{font-size:14px;color:#28251E;line-height:1.75;margin:8px 0;}
+blockquote{border-left:3px solid #BE8E6F;margin:18px 0;padding:14px 20px;background:#F6E7D1;border-radius:0 6px 6px 0;font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:#28251E;line-height:1.6;}
+.lbl{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#BE8E6F;margin-bottom:6px;}
+
+/* CARDS */
+.card{background:rgba(255,255,255,0.6);border:1px solid #E2CCB0;border-radius:6px;padding:18px 22px;margin-bottom:14px;}
+.card.ac{border-left:3px solid #BE8E6F;}
+.card p{margin:6px 0;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-top:14px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:9px 13px;background:#8A8370;color:#fff;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;}
+th+th{border-left:1px solid rgba(255,255,255,0.12);}
+td{padding:9px 13px;color:#28251E;border-bottom:1px solid #E2CCB0;vertical-align:top;line-height:1.55;}
+td+td{border-left:1px solid #E2CCB0;}
+tr:nth-child(even) td{background:rgba(255,255,255,0.25);}
+tr:nth-child(odd) td{background:rgba(255,255,255,0.55);}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.tag-d{padding:5px 14px;background:#1C1A15;color:#BE8E6F;border-radius:4px;font-size:12px;}
+.tag-l{padding:5px 14px;background:#E8E9E1;color:#28251E;border:1px solid #E2CCB0;border-radius:20px;font-size:12px;}
+.tag-r{padding:5px 14px;background:#fff0f0;color:#c0392b;border:1px solid #ffd0cc;border-radius:20px;font-size:12px;}
+
+/* PACKAGES */
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;margin-top:14px;}
+.pkg{border-radius:8px;padding:22px 18px;color:#fff;}
+.pkg-lbl{font-size:9px;letter-spacing:0.2em;opacity:0.6;margin-bottom:4px;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;}
+.pkg-price{font-size:15px;font-weight:600;margin:10px 0;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.2);}
+.pkg-item{font-size:11px;opacity:0.82;margin-bottom:5px;line-height:1.4;}
+.pkg-best{margin-top:14px;font-size:10px;opacity:0.5;background:rgba(0,0,0,0.15);padding:6px 9px;border-radius:4px;}
+
+/* COLORS */
+.clr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-top:14px;}
+.clr-card{border-radius:7px;overflow:hidden;border:1px solid #E2CCB0;}
+.clr-swatch{height:68px;}
+.clr-info{padding:9px 11px;background:rgba(255,255,255,0.5);}
+.clr-name{font-size:12px;font-weight:600;color:#28251E;}
+.clr-hex{font-size:10px;color:#8A8370;font-family:monospace;margin-top:2px;}
+.clr-role{font-size:10px;color:#5C5848;margin-top:3px;line-height:1.35;}
+
+/* STEPS */
+.step{display:flex;gap:12px;margin-bottom:9px;}
+.step-day{width:64px;flex-shrink:0;text-align:center;padding:8px 4px;background:#1C1A15;border-radius:6px;color:#BE8E6F;font-size:10px;font-weight:600;letter-spacing:0.06em;}
+.step-body{flex:1;background:rgba(255,255,255,0.5);border:1px solid #E2CCB0;border-radius:6px;padding:10px 14px;}
+.step-t{font-size:13px;font-weight:600;color:#28251E;}
+.step-d{font-size:12px;color:#5C5848;margin-top:3px;line-height:1.5;}
+
+/* PIPELINE */
+.pipe{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 22px;align-items:center;}
+.pipe-s{padding:6px 12px;background:#1C1A15;color:#BE8E6F;border-radius:4px;font-size:11px;font-weight:500;}
+.pipe-arr{color:#8A8370;font-size:13px;}
+
+/* OBJECTIONS */
+.obj-q{padding:11px 16px;background:#1C1A15;border-radius:6px 6px 0 0;font-family:'Cormorant Garamond',serif;font-size:18px;color:#BE8E6F;font-style:italic;line-height:1.4;margin-top:18px;}
+.obj-a{padding:16px 20px;background:rgba(255,255,255,0.65);border:1px solid #E2CCB0;border-top:none;border-radius:0 0 6px 6px;font-size:13px;color:#28251E;line-height:1.8;}
+
+/* PERSONAS */
+.persona{background:rgba(255,255,255,0.6);border:1px solid #E2CCB0;border-radius:6px;padding:18px 20px;margin-bottom:16px;}
+.persona-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.persona-av{width:40px;height:40px;border-radius:50%;background:#9D9883;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;}
+.persona-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:#28251E;margin-top:3px;}
+.p-tbl{width:100%;font-size:12px;border-collapse:collapse;}
+.p-tbl td:first-child{color:#BE8E6F;font-weight:600;width:80px;padding:4px 10px 4px 0;vertical-align:top;}
+.p-tbl td:last-child{color:#5C5848;padding:4px 0;line-height:1.5;border:none;background:transparent;}
+
+/* COVER */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:50px 30px;background:linear-gradient(160deg,#F7F0E6 0%,#F6E7D1 55%,#E8E9E1 100%);}
+.cover-icon{width:76px;height:76px;border-radius:50%;background:#1C1A15;display:flex;align-items:center;justify-content:center;margin-bottom:28px;box-shadow:0 8px 30px rgba(0,0,0,0.18);font-size:30px;}
+.cover-h{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;color:#28251E;letter-spacing:0.2em;line-height:1;}
+.cover-urdu{font-size:16px;letter-spacing:0.22em;color:#8A8370;margin-top:8px;}
+.cover-line{width:54px;height:1px;background:#BE8E6F;margin:20px auto;}
+.cover-sub{font-size:11px;letter-spacing:0.25em;color:#5C5848;text-transform:uppercase;}
+.cover-slogan{margin-top:34px;padding:16px 26px;border:1px solid #E2CCB0;border-radius:4px;background:rgba(255,255,255,0.4);}
+.cover-slogan-lbl{font-size:9px;letter-spacing:0.2em;color:#8A8370;text-transform:uppercase;margin-bottom:7px;}
+.cover-slogan-txt{font-family:'Cormorant Garamond',serif;font-size:19px;color:#28251E;font-weight:500;letter-spacing:0.06em;}
+.swatches{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:32px;}
+.swatch{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,0.7);box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:360px;width:100%;margin-top:32px;}
+.stat{padding:14px;background:rgba(255,255,255,0.5);border:1px solid #E2CCB0;border-radius:6px;text-align:center;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:26px;color:#BE8E6F;font-weight:500;}
+.stat-l{font-size:10px;color:#8A8370;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+
+/* BOOK FOOTER */
+.bfooter{margin-top:44px;padding:28px;background:#1C1A15;border-radius:8px;text-align:center;}
+.bf-name{font-family:'Cormorant Garamond',serif;font-size:28px;color:#BE8E6F;letter-spacing:0.18em;}
+.bf-line{width:36px;height:1px;background:#BE8E6F;margin:14px auto;opacity:0.4;}
+.bf-slogan{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.22em;}
+.bf-meta{font-size:10px;color:rgba(255,255,255,0.18);margin-top:14px;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="logo-box">
+    <h1>MURAQBA</h1>
+    <span>BRAND BOOK 2025</span>
+  </div>
+  <nav id="nav"></nav>
+  <div class="sidebar-foot">WE OBSERVE.<br>WE TARGET.<br>WE SCALE.</div>
+</aside>
+
+<main>
+  <div class="content" id="content"></div>
+</main>
+
+<script>
+// ── Navigation Data ────────────────────────────────────────────────
+const navData = [
+  {label:null,items:[{id:'cover',label:'Brand Book'}]},
+  {label:'01 — Identity',items:[{id:'overview',label:'Agency Overview'},{id:'usp',label:'USP & Positioning'},{id:'slogans',label:'Slogans & Taglines'}]},
+  {label:'02 — Brand',items:[{id:'colors',label:'Color Palette'},{id:'typography',label:'Typography'},{id:'logo',label:'Logo & Identity'},{id:'voice',label:'Tone of Voice'}]},
+  {label:'03 — Services',items:[{id:'services',label:'Service Catalogue'},{id:'pricing',label:'Packages & Pricing'},{id:'delivery',label:'Delivery Process'},{id:'scope',label:'Scope Boundaries'}]},
+  {label:'04 — Clients',items:[{id:'niches',label:'Niches'},{id:'icp',label:'Ideal Client Profile'},{id:'personas',label:'Client Personas'},{id:'antiicp',label:'Anti-ICP'}]},
+  {label:'05 — Sales',items:[{id:'leadgen',label:'Lead Generation'},{id:'outreach',label:'Outreach Templates'},{id:'sales',label:'Sales Process'},{id:'objections',label:'Objection Handling'}]},
+  {label:'06 — Operations',items:[{id:'team',label:'Team Structure'},{id:'tech',label:'Tech Stack'},{id:'comms',label:'Communication'},{id:'policies',label:'Policies'}]},
+];
+
+// ── Helpers ────────────────────────────────────────────────────────
+let active = 'cover';
+
+function tbl(cols,rows){
+  return `<div class="tbl-wrap"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function card(h,ac=false){return `<div class="card${ac?' ac':''}">${h}</div>`;}
+function lbl(t){return `<div class="lbl">${t}</div>`;}
+function h2(t){return `<h2>${t}</h2>`;}
+function p(t){return `<p>${t}</p>`;}
+function bq(t){return `<blockquote>${t}</blockquote>`;}
+function hdr(num,phase,title){
+  return `<div class="sec-meta">Phase ${num} <span>${phase}</span></div><div class="sec-title">${title}</div><div class="accent-bar"></div>`;
+}
+
+// ── Pages ──────────────────────────────────────────────────────────
+const pages = {
+
+cover:`<div class="cover">
+  <div class="cover-icon">◈</div>
+  <div class="cover-h">MURAQBA</div>
+  <div class="cover-urdu">مراقبہ</div>
+  <div class="cover-line"></div>
+  <div class="cover-sub">Complete Agency Documentation</div>
+  <div style="font-size:11px;color:#8A8370;margin-top:5px;">Brand Book &middot; 2025 &middot; Kasur / Lahore, Pakistan</div>
+  <div class="cover-slogan">
+    <div class="cover-slogan-lbl">Primary Slogan</div>
+    <div class="cover-slogan-txt">WE OBSERVE. WE TARGET. WE SCALE.</div>
+  </div>
+  <div class="swatches">
+    ${['#9D9883','#F7F0E6','#E2CCB0','#C8BFAE','#949282','#8A8370','#F6E7D1','#CDD1C8','#BE8E6F','#E8E9E1'].map(h=>`<div class="swatch" style="background:${h}"></div>`).join('')}
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Phases</div></div>
+    <div class="stat"><div class="stat-n">25+</div><div class="stat-l">Sections</div></div>
+    <div class="stat"><div class="stat-n">2025</div><div class="stat-l">Founded</div></div>
+  </div>
+</div>`,
+
+overview:`${hdr('01','Identity & Foundation','Agency Overview')}
+${card(`${lbl('Agency Name')}<div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:#28251E;margin-top:6px;letter-spacing:0.1em;">MURAQBA</div>${p('<em>MURAQBA (مراقبہ)</em> is an Arabic-Urdu word meaning <strong>focused awareness</strong> — a state of deep, intentional observation and presence. The name reflects the agency\'s approach: watching every detail of a client\'s brand with precision, patience, and purpose.')}`,true)}
+${h2('Founding Story')}
+${p('MURAQBA was founded by <strong>Shanu</strong>, a certified Full Stack Digital Marketer from IDEOVERSITY, Lahore — specializing in Facebook and Instagram advertising.')}
+${p("The agency started with a real problem. When Shanu's sister launched her clothing brand, the challenge was obvious — a great product with no system behind it. No strategy, no content direction, no lead generation, no roadmap. Rather than outsource that problem, Shanu stepped in and built the entire digital presence from the ground up.")}
+${p("That experience revealed something bigger: thousands of small clothing brands and digital product sellers across Pakistan face the exact same problem. They have something to sell but no clarity on how to grow it. That moment became the founding purpose of MURAQBA.")}
+${h2('Mission Statement')}
+${bq('To help clothing brands and digital product sellers generate real leads, build lasting brand presence, and grow with clarity — through focused strategy, authentic content, and high-converting advertising.')}
+${h2('Vision Statement')}
+${bq('To become a globally recognized brand management agency — built from Pakistan, serving the world.')}
+${p('In 3–5 years, MURAQBA will operate as a full-service international agency with a specialized team covering paid advertising, content creation, brand strategy, and digital product marketing. We started local. We think global.')}
+${h2('Core Values')}
+${tbl(['Value','What It Means at MURAQBA'],[
+['Results First','Every decision is measured against one question: does this move the client forward?'],
+['Clarity Over Complexity','We communicate clearly, set honest expectations, and never hide behind jargon.'],
+['Ownership Mentality',"We treat every client's brand as if it were our own."],
+['Continuous Growth','Always learning, testing, and upgrading our methods so clients never fall behind.'],
+['Trust as a Foundation','We build long-term partnerships, not one-off transactions.'],
+])}
+${h2('Agency at a Glance')}
+${tbl(['Field','Detail'],[
+['Agency Name','MURAQBA'],['Founded','2025'],['Founder','Shanu'],
+['Headquarters','Kasur / Lahore, Punjab, Pakistan'],
+['Certification','Full Stack Digital Marketing — IDEOVERSITY, Lahore'],
+['Specialization','Facebook & Instagram Ads, Brand Management, Lead Generation, Content Creation'],
+['Primary Markets',"Women's Clothing Brands, Digital Product Sellers"],
+['Social Media','Instagram: @muraqba &nbsp;|&nbsp; Facebook: muraqbaads'],
+['Contact','dearshanmushtaq@gmail.com'],
+['Stage','Early-stage, growing'],
+['Vision','International full-service brand management agency'],
+])}`,
+
+usp:`${hdr('01','Identity & Foundation','USP & Positioning')}
+${card(`${lbl('Unique Selling Proposition')}<div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#28251E;margin-top:10px;line-height:1.35;">"You only pay us after you see the results we promised."</div>`,true)}
+${h2('What Makes MURAQBA Different')}
+${tbl(['USP Point','Description'],[
+['Payment After Results','Clients pay only after MURAQBA achieves the agreed milestone. Zero financial risk for the client.'],
+['7-Day Action Plan','Every new client receives a customised 7-day plan on Day 1 — no guessing, no waiting.'],
+['30-Day Growth Roadmap','A clear step-by-step roadmap is delivered before any work begins.'],
+['Full Setup from Scratch','MURAQBA builds the entire digital presence from zero — page, content, ads, strategy.'],
+['Personal Founder Attention','Every client gets direct access to the founder — not a junior executive.'],
+])}
+${h2('Positioning Statement')}
+${bq('For new and growing clothing brands and digital product sellers who are tired of guessing — MURAQBA is the results-first digital agency that builds your entire brand presence from scratch and only charges you after delivering real, agreed results.')}
+${h2('Elevator Pitch (30 seconds)')}
+${card(p('"We are MURAQBA — a digital marketing agency based in Lahore, Pakistan. We work specifically with women\'s clothing brands and digital product sellers who are just starting out or stuck at a growth plateau. What makes us different: we don\'t charge you until we show you results. We build your full digital presence, run your ads, create your content, and only invoice you after hitting the goal we agreed on together."'))}`,
+
+slogans:`${hdr('01','Identity & Foundation','Slogans & Taglines')}
+${card(`${lbl('Primary Slogan')}<div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:#28251E;margin-top:10px;letter-spacing:0.06em;">WE OBSERVE. WE TARGET. WE SCALE.</div>${p('This three-part slogan mirrors the MURAQBA philosophy: observe deeply, target with precision, scale what works. It directly references the meaning of the name — مراقبہ / focused observation.')}`,true)}
+${h2('Slogan Breakdown')}
+${tbl(['Part','Meaning','Agency Action'],[
+['WE OBSERVE','Rooted in MURAQBA — deep, focused awareness','Brand audit, audience research, competitor analysis'],
+['WE TARGET','Precision over guesswork','Laser-focused ad targeting, ideal customer profiling'],
+['WE SCALE','Growth is always the end goal','Optimisation, campaign expansion, results delivery'],
+])}
+${h2('Supporting Taglines')}
+${tbl(['Tagline','Use Case'],[
+['Pay After Results. Not Before.','Lead gen ads, cold outreach, proposals'],
+['Your Brand. Our Focus.','Instagram bio, website header'],
+['From Zero to Visible.','Full brand setup service campaigns'],
+['Focused Strategy. Real Growth.','Email signature, business card'],
+['Built from Pakistan. Built for the World.','Brand story content, about section'],
+])}
+${h2('Usage Rules')}
+${card(`${p('✅ Always write primary slogan in ALL CAPS with full stops: <strong>WE OBSERVE. WE TARGET. WE SCALE.</strong>')}${p('✅ Use supporting taglines individually — never stack multiple together')}${p('❌ Never alter, shorten, or reword the primary slogan')}${p('❌ Never use alongside competing agency messaging')}`)}`,
+
+colors:`${hdr('02','Brand Identity','Color Palette')}
+${p("MURAQBA's palette is built on warm earth tones and organic neutrals — communicating calm confidence, premium focus, and trustworthy professionalism.")}
+<div class="clr-grid">
+${[
+{hex:'#9D9883',name:'Sage Stone',role:'Primary Brand Color'},
+{hex:'#F7F0E6',name:'Warm Cream',role:'Background / Light Base'},
+{hex:'#E2CCB0',name:'Desert Sand',role:'Borders / Dividers'},
+{hex:'#C8BFAE',name:'Warm Linen',role:'Secondary Backgrounds'},
+{hex:'#949282',name:'Driftwood',role:'Secondary Text'},
+{hex:'#8A8370',name:'Aged Oak',role:'Headings / Dark Elements'},
+{hex:'#F6E7D1',name:'Parchment',role:'Card Backgrounds'},
+{hex:'#CDD1C8',name:'Morning Mist',role:'Soft Contrast Areas'},
+{hex:'#BE8E6F',name:'Terracotta',role:'CTA / Highlight Accent'},
+{hex:'#E8E9E1',name:'Pearl Grey',role:'Section Backgrounds'},
+].map(c=>`<div class="clr-card"><div class="clr-swatch" style="background:${c.hex}"></div><div class="clr-info"><div class="clr-name">${c.name}</div><div class="clr-hex">${c.hex}</div><div class="clr-role">${c.role}</div></div></div>`).join('')}
+</div>
+${h2('Color Usage Rules')}
+${tbl(['Color','Approved Uses','Never Use For'],[
+['#9D9883 Sage Stone','Backgrounds, section fills, secondary elements','CTA buttons — too muted'],
+['#BE8E6F Terracotta','CTAs, highlights, accent lines, links','Large background fills'],
+['#F7F0E6 Warm Cream','Main backgrounds, white space','Text — not enough contrast'],
+['#8A8370 Aged Oak','Headings, body text, dark elements','Backgrounds — too dark'],
+['#CDD1C8 Morning Mist','Cards, secondary section backgrounds','Body text — insufficient contrast'],
+])}`,
+
+typography:`${hdr('02','Brand Identity','Typography System')}
+${h2('Font Stack')}
+${tbl(['Role','Font','Weight','Use Case'],[
+['Brand Name / Headlines','Poppins','Semi Bold (600)','Agency name, section titles, hero text'],
+['Core Messaging','Most Serrate','Bold','Key messages, ad headlines, impact text'],
+['Slogan','Gibson','Regular','Primary slogan only — WE OBSERVE. WE TARGET. WE SCALE.'],
+['Body & Details','Figtree','Bold','Descriptions, body copy, captions'],
+['CTA & Buttons','Locator Display','Regular','Call-to-action buttons, links'],
+])}
+${h2('Typography Hierarchy')}
+${card(`
+<div style="margin-bottom:16px;">${lbl('Level 1 — Brand Name')}<div style="font-size:32px;font-weight:600;color:#28251E;margin-top:5px;letter-spacing:0.08em;">MURAQBA</div><div style="font-size:10px;color:#8A8370;margin-top:3px;">Poppins Semi Bold &middot; 36–48px</div></div>
+<div style="border-top:1px solid #E2CCB0;padding-top:16px;margin-bottom:16px;">${lbl('Level 2 — Slogan')}<div style="font-size:18px;color:#28251E;margin-top:6px;letter-spacing:0.06em;">WE OBSERVE. WE TARGET. WE SCALE.</div><div style="font-size:10px;color:#8A8370;margin-top:3px;">Gibson Regular &middot; 18–22px &middot; ALL CAPS always</div></div>
+<div style="border-top:1px solid #E2CCB0;padding-top:16px;margin-bottom:16px;">${lbl('Level 3 — Headings')}<div style="font-size:22px;font-weight:600;color:#28251E;margin-top:6px;">Service Packages & Pricing</div><div style="font-size:10px;color:#8A8370;margin-top:3px;">Poppins Semi Bold &middot; 22–28px</div></div>
+<div style="border-top:1px solid #E2CCB0;padding-top:16px;margin-bottom:16px;">${lbl('Level 4 — Body Text')}<div style="font-size:14px;font-weight:700;color:#5C5848;margin-top:6px;line-height:1.7;">We help clothing brands grow with clarity, strategy, and results-first advertising.</div><div style="font-size:10px;color:#8A8370;margin-top:3px;">Figtree Bold &middot; 14–16px</div></div>
+<div style="border-top:1px solid #E2CCB0;padding-top:16px;">${lbl('Level 5 — CTA')}<div style="display:inline-block;background:#BE8E6F;color:#fff;padding:9px 22px;border-radius:4px;font-size:12px;letter-spacing:0.1em;margin-top:8px;">GET STARTED TODAY</div><div style="font-size:10px;color:#8A8370;margin-top:8px;">Locator Display &middot; 12–14px &middot; ALL CAPS</div></div>
+`)}`,
+
+logo:`${hdr('02','Brand Identity','Logo & Identity')}
+${card(`${lbl('Logo Concept')}${p('The MURAQBA logo is a <strong>vector illustration of a person in the muraqba (meditation) posture</strong> — seated in deep concentration, hands on knees, eyes closed, fully present. There is no text in the logo mark itself. It stands alone as a symbol of focused awareness.')}`,true)}
+${h2('Logo Meaning')}
+${p("The seated figure represents MURAQBA's core philosophy: before we act, we observe deeply. The stillness communicates patience, precision, and intentional strategy — the opposite of chaotic, reactive marketing.")}
+${h2('Logo Variations')}
+${tbl(['Variation','When to Use'],[
+['Icon Only — Dark figure on cream','Primary: profile pictures, stamps, watermarks, WhatsApp DP'],
+['Icon Only — Cream figure on dark','Dark backgrounds, ad creatives, reel thumbnails'],
+['Icon + MURAQBA wordmark','Proposals, documents, business cards, website header'],
+['Icon + Slogan','Brand cover photos, letterheads, presentation covers'],
+])}
+${h2('Usage Rules')}
+${card(`${p('✅ Maintain clear space equal to the height of the seated figure')}${p('✅ Use approved color combinations only: dark on cream / cream on dark')}${p('✅ Minimum size: 40×40px icon, 120px width for wordmark')}${p('❌ Never distort, stretch, rotate, or skew the logo')}${p('❌ Never add shadows, glows, or effects')}${p('❌ Never place on a busy or clashing background')}${p('❌ Never redraw or recreate in a different style')}`)}`,
+
+voice:`${hdr('02','Brand Identity','Tone of Voice')}
+${card(`${lbl('Brand Personality')}<div class="tags" style="margin-top:10px;">${['Confident','Results-Driven','Focused','Direct','Trustworthy','Ambitious','Calm'].map(w=>`<span class="tag-d">${w}</span>`).join('')}</div>`,true)}
+${h2('Voice Characteristics')}
+${tbl(['Trait','What This Sounds Like','What to Avoid'],[
+['Confident','Clear, assertive statements of value — no over-qualifying','"We might be able to..." / "Maybe..."'],
+['Direct','Short sentences, one idea per message','Long paragraphs, jargon-heavy explanations'],
+['Results-Focused','Lead with outcomes, not processes or tools','Talking too much about software or features'],
+['Warm but Professional','Respectful, personal — not robotic or stiff','Cold corporate tone or over-casual slang'],
+['Honest','Admitting what we can and cannot do','Overpromising or fake guarantees'],
+])}
+${h2('Words We Use')}
+${card(`<div class="tags">${['Results','Clarity','Growth','Focused','Strategy','Deliver','Proven','Targeted','Scale','Performance','Leads','Consistent'].map(w=>`<span class="tag-l">${w}</span>`).join('')}</div>`)}
+${h2('Words We Avoid')}
+${card(`<div class="tags">${['Maybe','Try','Might','Guarantee viral','Best in world','Cheap','Just a beginner','We think','Probably'].map(w=>`<span class="tag-r">${w}</span>`).join('')}</div>`)}
+${h2('Signature Phrase')}${bq('WE OBSERVE. WE TARGET. WE SCALE.')}`,
+
+services:`${hdr('03','Services & Offerings','Service Catalogue')}
+${tbl(['#','Service',"What's Included",'Timeline'],[
+['01','Facebook & Instagram Ads Management','Campaign setup, audience targeting, ad creatives, A/B testing, weekly optimisation, performance reports','Ongoing / Monthly'],
+['02','Full Brand Setup from Scratch','Facebook page + Instagram profile setup, bio writing, highlights, profile & cover design, link in bio','3–5 Days'],
+['03','Content Creation & Posting','12–16 posts/month, captions, hashtag research, content calendar, stories','Monthly'],
+['04','Lead Generation Campaigns','Targeted ad campaigns to generate leads and inquiries for clothing brands or digital product sellers','Ongoing'],
+['05','Brand Roadmap Consultation','7-day action plan, 30-day growth roadmap, clarity session for new brands','1–2 Days'],
+])}
+${h2('Future Services (Phase 2 Expansion)')}
+${tbl(['Service','Estimated Launch'],[
+['Google Ads Management','Phase 2 Growth'],
+['Influencer Outreach Coordination','Phase 2 Growth'],
+['Email Marketing Setup','Phase 2 Growth'],
+['Basic Landing Page Setup','Phase 3 Expansion'],
+['Reels & Short-Form Video Editing','Phase 3 Expansion'],
+])}`,
+
+pricing:`${hdr('03','Services & Offerings','Packages & Pricing')}
+${card(`${lbl('MURAQBA Guarantee')}${p('All packages operate on a <strong>results-first model</strong>. A 30% advance covers setup. The remaining 70% is collected only after the agreed milestone is achieved and shown to the client.')}`,true)}
+${h2('Package Tiers')}
+<div class="pkg-grid">
+${[
+{name:'STARTER',price:'PKR 15,000 / mo',bg:'#9D9883',items:['Brand setup (page + profile)','8 posts/month','Basic page management','Monthly performance snapshot'],best:"New brands, zero online presence"},
+{name:'GROWTH',price:'PKR 30,000 / mo',bg:'#8A8370',items:['16 posts/month','Facebook Ads (up to PKR 10k budget)','Monthly report + analysis','30-day roadmap'],best:"Brands ready to run ads"},
+{name:'SCALE',price:'PKR 55,000 / mo',bg:'#BE8E6F',items:['Everything in Growth','Lead gen campaigns','Full content calendar','Bi-weekly strategy calls','Monthly performance review'],best:"Serious brands wanting consistent leads"},
+].map(pk=>`<div class="pkg" style="background:${pk.bg}"><div class="pkg-lbl">PACKAGE</div><div class="pkg-name">${pk.name}</div><div class="pkg-price">${pk.price}</div>${pk.items.map(i=>`<div class="pkg-item">✓ ${i}</div>`).join('')}<div class="pkg-best">Best for: ${pk.best}</div></div>`).join('')}
+</div>`,
+
+delivery:`${hdr('03','Services & Offerings','Delivery Process')}
+${h2('First 7 Days — Client Onboarding')}
+${[
+{day:'Day 1',title:'Onboarding Call',desc:'Collect brand assets, page access, product info, target audience brief. Agree on milestone goal.'},
+{day:'Day 2',title:'Brand Audit',desc:'Audit existing digital presence. Identify gaps, strengths, and quick wins.'},
+{day:'Day 3',title:'Roadmap Delivery',desc:'Deliver 30-day Brand Roadmap and content strategy. Client reviews and approves.'},
+{day:'Day 4–5',title:'Setup & Content',desc:'Setup/optimise all pages. Create first content batch and send for client approval.'},
+{day:'Day 6',title:'Campaign Launch',desc:'Launch first ad campaign (if included). Set tracking, conversion events, and reporting.'},
+{day:'Day 7',title:'First Check-in',desc:'Send first performance snapshot. Show what is live, what is performing, and what comes next.'},
+].map(s=>`<div class="step"><div class="step-day">${s.day}</div><div class="step-body"><div class="step-t">${s.title}</div><div class="step-d">${s.desc}</div></div></div>`).join('')}
+${h2('Ongoing Reporting')}
+${tbl(['Frequency','What Is Shared'],[
+['Every 3–4 Days','WhatsApp update on ad performance or content status'],
+['Weekly','Ad snapshot: reach, clicks, leads, cost per result'],
+['Bi-weekly','Content review: top posts, engagement, audience growth'],
+['Monthly (last day)','Full campaign report + next month plan via WhatsApp + Google Sheet'],
+])}`,
+
+scope:`${hdr('03','Services & Offerings','Scope Boundaries')}
+${h2('What MURAQBA Does NOT Do')}
+${tbl(['Out of Scope','Reason'],[
+['Full-scale website development','Outside current service specialization'],
+['Product photography or shoots','Client must supply minimum 10 product images'],
+['Guaranteed viral content','Virality cannot be promised by any agency'],
+['Ads below PKR 5,000/month budget','Insufficient data for meaningful optimisation'],
+['Work without brand assets','Content creation is impossible without photos or videos'],
+])}
+${h2('What Clients Must Provide Before Work Begins')}
+${card(`${p('✅ Minimum 10 product photos or videos (good quality)')}${p('✅ Facebook page and Instagram profile admin access')}${p('✅ Agreed monthly ad budget — separate from agency fee (min. PKR 5,000)')}${p('✅ Brand preferences: colors, tone, competitor references')}${p('✅ WhatsApp number for direct communication')}${p('✅ 30% advance payment to cover setup costs')}`)}`,
+
+niches:`${hdr('04','Target Clients','Niches')}
+${h2('Primary Niche')}
+${card(`${lbl("Women's Clothing Brands — Online Sellers")}${p("MURAQBA's sharpest focus is online women's fashion brands on Instagram and Facebook. This includes abayas, casual wear, formal wear, streetwear, modest fashion, and bridal wear.")}${p("<strong>Why this niche:</strong> Massive, fast-growing market in Pakistan and diaspora communities globally. New brands launch daily with zero marketing knowledge — high demand for exactly what MURAQBA offers.")}`,true)}
+${h2('Secondary Niche')}
+${card(`${lbl('Digital Product Sellers')}${p('Individuals selling eBooks, online courses, Canva templates, coaching programs, and digital downloads through social media.')}${p('Zero inventory, high margin — clients have budget to spend on marketing. Strong need for lead generation and audience targeting.')}`)}
+${h2('Geographic Strategy')}
+${tbl(['Market','Priority','Approach'],[
+['Pakistan — Lahore, Karachi, Islamabad','Primary','Direct cold outreach, referrals, local trust-building via content'],
+['Gulf — UAE, Saudi Arabia, Qatar','Secondary','Target Pakistani diaspora fashion brands and digital sellers'],
+['UK Pakistani Community','Future','Expand once strong case studies and international portfolio are built'],
+])}`,
+
+icp:`${hdr('04','Target Clients','Ideal Client Profile')}
+${tbl(['Field','Detail'],[
+['Who They Are',"Women's clothing brand owner or digital product seller"],
+['Business Stage','Just launched or 0–12 months old with no clear marketing strategy'],
+['Platform','Selling via Instagram and/or Facebook'],
+['Location','Pakistan (primary), Gulf & UK Pakistani diaspora (secondary)'],
+['Monthly Budget','$500+ combined — ad spend + agency fee'],
+['Mindset','Motivated, open to guidance, wants real and measurable growth'],
+['Core Problem','No roadmap, inconsistent content, zero paid advertising experience'],
+['Decision Style','Trust-driven — needs to see proof before committing'],
+['Communication','Prefers WhatsApp — quick, informal, responsive'],
+])}`,
+
+personas:`${hdr('04','Target Clients','Client Personas')}
+${[
+{name:'Zara, 24 — Lahore',type:'Primary Persona — Clothing Brand',rows:[['Business','Online abaya brand, launched 3 months ago'],['Problem','Only getting orders from friends and family. Posts inconsistently.'],['Goal','First 50 real customers outside her personal network in 30 days'],['Fear',"Wasting money on ads that don't work"],['Budget','PKR 20,000–35,000/month combined'],['Needs','Full brand setup, content direction, first ad campaign, clear roadmap']]},
+{name:'Hina, 31 — Dubai (Pakistani)',type:'Secondary Persona — Diaspora Brand',rows:[['Business',"Women's casual wear targeting Pakistani expats in UAE"],['Problem','Has Instagram page but engagement is dead. Boosting posts randomly.'],['Goal','Consistent weekly orders from UAE-based Pakistani women'],['Fear','Losing money on bad targeting like her last agency'],['Budget','$300–500/month combined'],['Needs','Proper targeting, content calendar, lead generation campaign']]},
+{name:'Usman, 27 — Karachi',type:'Tertiary Persona — Digital Products',rows:[['Business','Sells Canva templates and productivity eBook on Instagram'],['Problem','Getting DMs but not converting to actual sales'],['Goal','50+ digital product sales per month'],['Fear',"Ads are too technical — doesn't know where to start"],['Budget','PKR 25,000–40,000/month combined'],['Needs','Lead generation funnel, retargeting ads, content that sells']]},
+].map(pr=>`<div class="persona"><div class="persona-hdr"><div><div class="lbl">${pr.type}</div><div class="persona-name">${pr.name}</div></div><div class="persona-av">◉</div></div><table class="p-tbl">${pr.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></div>`).join('')}`,
+
+antiicp:`${hdr('04','Target Clients','Anti-ICP')}
+${p('These are client types MURAQBA should decline — structurally incompatible with the results-first model.')}
+${h2('Red Flag Client Types')}
+${tbl(['Red Flag','Why to Decline'],[
+['Bad or unverified product',"No marketing fixes a product people don't want. MURAQBA works for free — directly violates the results-first USP."],
+['No ad budget (below PKR 5,000/mo)','Organic-only results take 6+ months — incompatible with pay-after-results model.'],
+['Wants guaranteed viral content','Cannot be promised. This client will always be unsatisfied.'],
+['Demands results in 3–5 days','Unrealistic expectations destroy the relationship before work can begin.'],
+['Refuses to provide product assets','Content creation is impossible without basic photos or videos.'],
+['Disrespectful communication','Affects output quality, creative focus, and brand reputation.'],
+])}
+${card(`${lbl('Critical Note')}${p('Since MURAQBA only collects payment after results — taking on a client with a bad product means working for nothing. A solid product client is always worth more than a high-paying bad product client. Never compromise this.')}`,true)}`,
+
+leadgen:`${hdr('05','Sales Strategy','Lead Generation')}
+${h2('Lead Generation Channels')}
+${tbl(['Channel','How MURAQBA Uses It','Priority'],[
+['Instagram DMs (Cold)',"Find women's clothing brand pages with low engagement, send personalised brand audit message",'High'],
+['Facebook Groups','Join Pakistani clothing & business owner groups, provide value, pitch softly','High'],
+['MURAQBA Content (Organic)','Post results, tips, transformations, and ad insights to attract inbound leads','High'],
+['Facebook DMs (Cold)','Target pages running boosted posts with no real strategy, offer free audit','Medium'],
+['WhatsApp Follow-up','Follow up warm leads within 24 hours, send proposals, maintain relationship','High'],
+['Referral Program','After first results: ask every satisfied client to refer one brand owner','Future'],
+])}
+${h2('Content Strategy — MURAQBA Page (0 to 100 Followers)')}
+${p('Post 4–5 times per week consistently. Build authority and generate inbound leads.')}
+${tbl(['Content Type','Example','Purpose'],[
+['Before & After','Brand with 0 strategy vs. after MURAQBA setup','Build proof and credibility'],
+['Tips & Education','"3 reasons your Facebook Ads are failing"','Build authority and trust'],
+['Behind the Scenes','Screen recording while building a real campaign','Transparency and trust'],
+['Client Results','Screenshots of leads, reach numbers, cost per result','Social proof'],
+['Bold Statements','"You should not pay an agency before seeing results."','Attract attention and leads'],
+])}`,
+
+outreach:`${hdr('05','Sales Strategy','Outreach Templates')}
+${h2("Cold DM — Women's Clothing Brand")}
+${card(`<p style="font-size:13px;line-height:1.9;font-style:italic;color:#28251E;">"Hi [Name] 👋 I came across your page and genuinely love what you're selling. I noticed your page has strong potential but your content and ads aren't reaching the right audience yet.<br><br>I'm Shanu from MURAQBA — we help women's clothing brands generate consistent leads through Facebook and Instagram. The best part? You only pay us after you see real results.<br><br>Would you be open to a free 10-minute chat? No pressure at all."</p>`,true)}
+${h2('Cold DM — Digital Product Seller')}
+${card(`<p style="font-size:13px;line-height:1.9;font-style:italic;color:#28251E;">"Hey [Name] 👋 I see you're selling [product] — great work. A lot of digital sellers struggle to convert followers into actual buyers and I think I can help.<br><br>At MURAQBA we run targeted ad campaigns for digital product sellers — and we only charge after you see agreed results.<br><br>Can I share a quick idea with you that could increase your sales this month?"</p>`,true)}
+${h2('Proposal Template (WhatsApp / PDF)')}
+${card(`<div style="font-size:13px;color:#28251E;line-height:2.1;"><strong>MURAQBA — Proposal for [Brand Name]</strong><div style="border-top:1px solid #E2CCB0;margin-top:10px;padding-top:10px;"><div><span style="color:#BE8E6F;font-weight:600;">Your Goal:</span> [What they told you in the discovery chat]</div><div><span style="color:#BE8E6F;font-weight:600;">Our Plan:</span> [3 clear bullet points of what you will do]</div><div><span style="color:#BE8E6F;font-weight:600;">Timeline:</span> 30 days</div><div><span style="color:#BE8E6F;font-weight:600;">Package:</span> [Package name + monthly price]</div><div><span style="color:#BE8E6F;font-weight:600;">Our Guarantee:</span> You pay only after [specific agreed milestone]</div><div><span style="color:#BE8E6F;font-weight:600;">To Start:</span> [List of required assets from client]</div><div><span style="color:#BE8E6F;font-weight:600;">Next Step:</span> Confirm + share page access</div></div></div>`)}`,
+
+sales:`${hdr('05','Sales Strategy','Sales Process')}
+${h2('Full Pipeline')}
+<div class="pipe">${['Cold DM','Warm Reply','Free Audit','Discovery Chat','Proposal Sent','Goal Agreement','Work Begins','Results Achieved','Payment Collected','Referral Requested'].map((s,i,a)=>`<span class="pipe-s">${s}</span>${i<a.length-1?'<span class="pipe-arr">→</span>':''}`).join('')}</div>
+${h2('Discovery Chat Agenda (15–20 mins)')}
+${tbl(['#','Question','Purpose'],[
+['1','What does your brand sell and who is your ideal customer?','Qualify the niche fit'],
+['2','What have you tried before for marketing?','Understand history, avoid repeating failures'],
+['3','What does success look like for you in 30 days?','Define the milestone for pay-after-results'],
+['4','What is your monthly ad budget?','Qualify budget (minimum PKR 5,000 ad spend)'],
+['5','Present the MURAQBA offer','Walk through packages, process, and results-first guarantee'],
+])}
+${h2('Trust Assets — Build in This Order')}
+${tbl(['Priority','Asset','How to Get It'],[
+['1st','Portfolio work samples',"Sister's brand + 2–3 practice projects"],
+['2nd','Campaign performance screenshots','Save every metric and result from every campaign'],
+['3rd','First testimonial','Ask sister to write 3 genuine sentences about MURAQBA'],
+['4th','First real case study','Before/after story with numbers from first paying client'],
+['5th','MURAQBA content page authority','Consistent posting builds long-term inbound trust'],
+])}`,
+
+objections:`${hdr('05','Sales Strategy','Objection Handling')}
+<div class="obj-q">"You're new, why should I trust you?"</div>
+<div class="obj-a">That's a completely fair question and I respect you for asking it. Yes, I am building my client portfolio right now. But that means you get something most established agencies won't give you: my full personal attention, daily focus on your brand, and I only get paid when you actually see results. You have zero financial risk. The only thing you're testing is whether my strategy works — and I'm confident enough in it to put my payment on the line.</div>
+
+<div class="obj-q">"Your price is too high"</div>
+<div class="obj-a">I understand. Let me ask you — what would one consistent lead per day be worth to your business in a month? If my work brings you even 10 paying customers, does the fee still feel too high? And remember, you don't pay me until we hit the goal we agreed on. So the real question isn't whether my price is high — it's whether the result is worth it to you.</div>
+
+<div class="obj-q">"I tried ads before and lost money"</div>
+<div class="obj-a">That's the most common thing I hear — and honestly, most people who tried ads before were either boosting posts randomly or working with someone who didn't understand their audience. I don't boost posts. I build proper campaigns with defined targeting, tested creatives, and a clear goal. And since you've already been burned once — you don't pay me anything until you see the result we agreed on. Your past experience is exactly why my model exists.</div>`,
+
+team:`${hdr('06','Operations','Team Structure')}
+${h2('Current Team')}
+${tbl(['Role','Person','Responsibilities'],[
+['Founder & CEO','Shanu','Strategy, client management, Facebook & Instagram ads, sales outreach, performance reporting, business development'],
+['Content Support (Informal)','Little Sister','Video editing support — in training, future full-time content team asset'],
+])}
+${h2('Hiring Roadmap')}
+${tbl(['Priority','Role','Why This Role First'],[
+['1st Hire','Content Creator / Video Editor','Frees Shanu from content work to focus fully on ads and new client acquisition'],
+['2nd Hire','Client Account Manager','Handles daily communication professionally as client base grows beyond 5 clients'],
+['3rd Hire','Second Ads Manager','Scales capacity — allows MURAQBA to take on more campaigns simultaneously'],
+])}
+${h2('Working Hours')}
+${tbl(['Day','Hours','Notes'],[
+['Monday – Saturday','9:00 AM – 8:00 PM PKT','Full availability for client communication and work'],
+['Sunday','Emergency only','Critical client issues only — no new work or outreach'],
+])}`,
+
+tech:`${hdr('06','Operations','Tech Stack')}
+${tbl(['Category','Tool','Purpose'],[
+['Advertising','Meta Ads Manager','Facebook & Instagram campaign creation, targeting, optimisation, and management'],
+['Graphic Design','Canva','Social media posts, proposals, brand assets, content creatives'],
+['Video Editing','CapCut','Reels, short-form video content, ad video creatives'],
+['Project Management','Notion','Client task tracking, campaign notes, content calendars, internal SOPs'],
+['Communication','WhatsApp','Primary client communication, proposal delivery, progress updates'],
+['Client Outreach','Instagram DMs / Facebook DMs','Cold outreach, lead conversations, prospect management'],
+['Data & Reporting','Google Sheets','Campaign performance tracking, client monthly reports'],
+['AI Assistant','Claude (Anthropic)','Documentation, copywriting, strategy support, content drafting'],
+])}`,
+
+comms:`${hdr('06','Operations','Communication Standards')}
+${h2('Client Communication Policy')}
+${tbl(['Standard','Policy'],[
+['Primary Channel','WhatsApp (main) — also via Instagram DM, Facebook DM, and Email'],
+['Response Time','Within 1 hour during working hours (9 AM – 8 PM PKT, Mon–Sat)'],
+['Progress Updates','Every 3–4 days via WhatsApp message or short voice note'],
+['Monthly Report','Sent on last day of every month via WhatsApp + Google Sheet link'],
+['Emergency Contact','WhatsApp call — available same day during working hours'],
+])}
+${h2('Client Reporting Schedule')}
+${tbl(['Frequency','What Is Shared','Format'],[
+['Every 3–4 Days','Ad performance or content status update','WhatsApp message'],
+['Weekly','Ad snapshot: reach, clicks, leads, cost per result','WhatsApp + screenshots'],
+['Bi-weekly','Content review: top posts, engagement, audience growth','WhatsApp message'],
+['Monthly','Full campaign report + next month plan','WhatsApp + Google Sheet'],
+])}`,
+
+policies:`${hdr('06','Operations','Policies')}
+${h2('Refund Policy')}
+${card(`${p('MURAQBA operates on a results-first model. A <strong>30% advance</strong> is collected at onboarding to cover setup costs. If the client is unsatisfied within the first <strong>3 days</strong> of campaign launch, the advance is fully refundable. After 3 days, no refunds — but MURAQBA commits to continuing work until the agreed milestone is reached before collecting remaining payment.')}`,true)}
+${h2('Revision Policy')}
+${card(`${p('<strong>Paid Ad Campaigns:</strong> No client revisions required. MURAQBA manages all ad creative and targeting decisions independently.')}${p('<strong>Content Creation:</strong> Every client receives <strong>3 free revision rounds per month</strong>. Additional revisions charged at PKR 500 per revision.')}`)}
+${h2('Contract Policy')}
+${card(p('A minimum WhatsApp written agreement is required before starting any project — clearly stating goal, timeline, deliverables, payment terms, and refund conditions. A formal PDF contract will be introduced as MURAQBA scales.'))}
+${h2('Confidentiality Policy')}
+${card(p('All client brand assets, product information, business data, campaign results, and strategies are strictly confidential. MURAQBA does not share any client information with third parties without explicit written consent.'))}
+<div class="bfooter">
+  <div class="bf-name">MURAQBA</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:0.15em;margin-top:6px;">مراقبہ &middot; Focused Awareness</div>
+  <div class="bf-line"></div>
+  <div class="bf-slogan">WE OBSERVE. WE TARGET. WE SCALE.</div>
+  <div class="bf-meta">Agency Documentation &middot; 2025 &middot; Kasur / Lahore, Pakistan<br>dearshanmushtaq@gmail.com &middot; @muraqba &middot; muraqbaads</div>
+</div>`,
+};
+
+// ── Build & Render ─────────────────────────────────────────────────
+function buildNav(){
+  const nav = document.getElementById('nav');
+  nav.innerHTML = '';
+  navData.forEach(group => {
+    if(group.label){
+      const d = document.createElement('div');
+      d.className = 'phase-lbl';
+      d.textContent = group.label;
+      nav.appendChild(d);
+    }
+    group.items.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn' + (item.id===active?' active':'');
+      btn.textContent = item.label;
+      btn.onclick = () => {
+        active = item.id;
+        buildNav();
+        document.getElementById('content').innerHTML = pages[active] || '';
+        document.querySelector('main').scrollTop = 0;
+      };
+      nav.appendChild(btn);
+    });
+  });
+}
+
+buildNav();
+document.getElementById('content').innerHTML = pages['cover'];
+</script>
+</body>
+</html>
