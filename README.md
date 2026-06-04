@@ -5,14 +5,13 @@
 Official agency documentation and brand book for **MURAQBA** — a results-first digital marketing agency based in Kasur / Lahore, Pakistan.
 
 ## 🌐 Live Website
-👉 [View Brand Book](https://ShanMushtaq.github.io/muraqbaads)
+👉 [View Website](https://ShanMushtaq.github.io/muraqbaads)
 
 ## 📋 What's Inside
 - Agency Identity & Foundation
-- Brand Identity System (Colors, Typography, Logo)
+- Brand Identity System 
 - Services & Packages
 - Target Clients & Niches
-- Lead Generation & Sales Strategy
 - Operations & Policies
 
 ## 📬 Contact
