@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MURAQBA — Client Service Agreement</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231C1A15'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='38' fill='%23BE8E6F' font-family='serif'%3E%E2%97%88%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0A0906;--cream:#F7F0E6;--sand:#E2CCB0;
+  --terra:#BE8E6F;--sage:#9D9883;--oak:#8A8370;
+  --dark:#1C1A15;--mid:#2E2B22;
+  --body-text:rgba(255,255,255,0.52);--muted:rgba(255,255,255,0.32);
+  --faint:rgba(255,255,255,0.1);--border:rgba(190,142,111,0.18);
+  --light-bg:#F7F0E6;--light-text:#28251E;
+  --light-muted:#5C5848;--light-border:#E2CCB0;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--terra);}
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(190,142,111,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease;}
+body:has(a:hover) #cursor-ring,body:has(button:hover) #cursor-ring{width:48px;height:48px;border-color:var(--terra);}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 56px;background:rgba(10,9,6,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:#fff;letter-spacing:0.22em;text-decoration:none;cursor:none;}
+.nav-logo em{color:var(--terra);font-style:normal;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{text-decoration:none;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;cursor:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;padding:10px 22px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:none;transition:opacity 0.25s;display:inline-block;}
+.nav-cta:hover{opacity:0.85;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:transparent;padding:4px;}
+.hamburger span{display:block;width:24px;height:1px;background:var(--cream);transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,9,6,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--muted);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;cursor:none;}
+.mobile-menu a:hover{color:var(--terra);}
+.mobile-close{position:absolute;top:28px;right:28px;background:transparent;border:none;color:var(--muted);font-size:24px;cursor:none;}
+
+/* ── PAGE HEADER (dark) ── */
+.page-header{
+  padding:150px 56px 80px;
+  background:var(--dark);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 40%,rgba(190,142,111,0.08) 0%,transparent 55%);}
+.page-header::after{
+  content:'◈';position:absolute;right:56px;bottom:-10px;
+  font-size:280px;color:rgba(190,142,111,0.04);
+  pointer-events:none;line-height:1;
+}
+.ph-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;}
+.ph-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--terra);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.ph-label::before{content:'';display:block;width:28px;height:1px;background:var(--terra);}
+.ph-title{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,70px);font-weight:300;color:#fff;line-height:1.0;}
+.ph-bar{width:44px;height:1px;background:var(--terra);margin:18px 0 0;}
+.ph-right p{font-size:15px;color:var(--body-text);line-height:1.85;margin-bottom:20px;}
+.ph-badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;}
+.ph-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(190,142,111,0.08);border:1px solid var(--border);font-size:11px;color:var(--terra);}
+
+/* ── TOC STRIP ── */
+.toc-strip{
+  background:#0d0c09;
+  border-bottom:1px solid var(--border);
+  padding:0 56px;
+  overflow-x:auto;
+  white-space:nowrap;
+}
+.toc-inner{max-width:1140px;margin:0 auto;display:flex;gap:0;}
+.toc-link{
+  display:inline-block;padding:18px 22px;
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;cursor:none;
+  border-bottom:2px solid transparent;
+  transition:all 0.25s;white-space:nowrap;
+}
+.toc-link:hover,.toc-link.active{color:var(--terra);border-bottom-color:var(--terra);}
+
+/* ── SHARED LAYOUT ── */
+.container{max-width:1140px;margin:0 auto;padding:0 56px;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── PARTIES SECTION ── */
+#parties{background:var(--ink);padding:80px 0;}
+.parties-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px;}
+.party-box{padding:32px;border:1px solid var(--border);position:relative;}
+.party-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--terra);}
+.party-lbl{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;font-weight:700;}
+.party-field{margin-bottom:14px;}
+.party-field:last-child{margin-bottom:0;}
+.pf-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);display:block;margin-bottom:5px;}
+.pf-val{font-size:14px;color:var(--cream);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.08);}
+/* Editable client fields */
+.pf-input{
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.12);
+  color:var(--cream);font-family:'Outfit',sans-serif;font-size:14px;
+  width:100%;padding:4px 0 6px;outline:none;cursor:none;
+  transition:border-color 0.25s;
+}
+.pf-input:focus{border-bottom-color:var(--terra);}
+.pf-input::placeholder{color:rgba(255,255,255,0.2);font-style:italic;}
+.section-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';display:block;width:28px;height:1px;background:var(--terra);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:#fff;line-height:1.1;}
+.section-bar{width:44px;height:1px;background:var(--terra);margin:14px 0 36px;}
+
+/* ── CLAUSES ── */
+#clauses{background:#0c0b09;padding:80px 0 100px;}
+.clauses-layout{display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start;}
+/* Sticky sidebar */
+.clauses-sidebar{position:sticky;top:90px;}
+.cs-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.cs-link{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:12px;color:var(--muted);text-decoration:none;cursor:none;border-bottom:1px solid rgba(255,255,255,0.04);transition:color 0.2s;}
+.cs-link:hover{color:var(--terra);}
+.cs-link.active{color:var(--terra);}
+.cs-num{width:22px;height:22px;border-radius:50%;background:rgba(190,142,111,0.1);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--terra);flex-shrink:0;font-weight:700;}
+/* Clauses main */
+.clause-item{padding:48px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.clause-item:first-child{padding-top:0;}
+.clause-item:last-child{border-bottom:none;}
+.clause-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:24px;}
+.clause-num-badge{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--dark);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--terra);font-size:13px;font-weight:700;
+}
+.clause-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#fff;margin-top:8px;}
+.clause-body p{font-size:13px;color:var(--body-text);line-height:1.85;margin-bottom:10px;}
+.clause-body p strong{color:var(--cream);}
+.clause-body ul{list-style:none;margin-top:8px;}
+.clause-body li{font-size:13px;color:var(--body-text);padding:9px 0 9px 22px;border-bottom:1px solid rgba(255,255,255,0.04);position:relative;line-height:1.65;}
+.clause-body li:last-child{border-bottom:none;}
+.clause-body li::before{content:'◈';position:absolute;left:0;color:var(--terra);font-size:8px;top:12px;}
+.clause-body li strong{color:var(--cream);}
+.clause-highlight{
+  margin:16px 0;padding:18px 22px;
+  background:rgba(190,142,111,0.07);
+  border-left:3px solid var(--terra);
+  font-size:13px;color:var(--sand);line-height:1.75;
+}
+.clause-highlight strong{color:var(--terra);}
+/* Inline fill fields inside clauses */
+.clause-field{
+  display:inline-block;
+  min-width:160px;
+  border-bottom:1px solid rgba(190,142,111,0.4);
+  padding:2px 8px;margin:0 4px;
+  font-size:13px;color:var(--cream);
+  cursor:none;outline:none;
+  transition:border-color 0.2s;
+  background:transparent;
+  font-family:'Outfit',sans-serif;
+}
+.clause-field:focus{border-bottom-color:var(--terra);}
+.clause-field::placeholder{color:rgba(255,255,255,0.2);font-style:italic;}
+.fields-row-inline{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+.field-inline{display:flex;flex-direction:column;gap:6px;}
+.fi-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);}
+.fi-input{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--cream);font-family:'Outfit',sans-serif;
+  font-size:13px;padding:10px 14px;outline:none;
+  transition:border-color 0.25s;cursor:none;
+}
+.fi-input:focus{border-color:var(--terra);}
+.fi-input::placeholder{color:rgba(255,255,255,0.2);font-style:italic;}
+.fi-textarea{min-height:72px;resize:vertical;line-height:1.6;}
+
+/* ── SIGNATURES ── */
+#signatures{background:var(--dark);padding:80px 0 100px;}
+.sig-intro{max-width:640px;margin-bottom:52px;}
+.sig-intro p{font-size:14px;color:var(--body-text);line-height:1.85;}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.sig-box{padding:36px 32px;border:1px solid var(--border);position:relative;}
+.sig-box::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--terra),transparent);}
+.sig-party{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);font-weight:700;margin-bottom:28px;}
+.sig-line-wrap{margin-bottom:8px;}
+.sig-line{height:56px;border-bottom:1px solid rgba(255,255,255,0.2);position:relative;cursor:none;}
+.sig-line-label{font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:0.06em;}
+.sig-fields{margin-top:22px;display:flex;flex-direction:column;gap:14px;}
+.sig-field{display:grid;grid-template-columns:80px 1fr;align-items:baseline;gap:12px;}
+.sf-label{font-size:10px;color:var(--sage);letter-spacing:0.08em;}
+.sf-input{
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);
+  color:var(--cream);font-family:'Outfit',sans-serif;
+  font-size:13px;padding:3px 0 5px;outline:none;
+  cursor:none;transition:border-color 0.25s;
+}
+.sf-input:focus{border-bottom-color:var(--terra);}
+.sf-input::placeholder{color:rgba(255,255,255,0.18);font-style:italic;}
+/* Digital consent */
+.consent-block{
+  margin-top:52px;padding:32px 36px;
+  background:rgba(190,142,111,0.06);
+  border:1px solid var(--border);
+}
+.consent-block h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px;}
+.consent-block p{font-size:13px;color:var(--body-text);line-height:1.8;margin-bottom:20px;}
+.consent-check{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+.consent-check input[type="checkbox"]{
+  width:18px;height:18px;flex-shrink:0;
+  accent-color:var(--terra);cursor:none;margin-top:2px;
+}
+.consent-check label{font-size:13px;color:var(--body-text);line-height:1.65;cursor:none;}
+.sign-btn{
+  display:inline-block;margin-top:10px;
+  background:var(--terra);color:#fff;
+  padding:15px 40px;font-size:12px;
+  font-family:'Outfit',sans-serif;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  border:none;cursor:none;transition:opacity 0.25s;
+}
+.sign-btn:hover{opacity:0.85;}
+.sign-success{
+  display:none;margin-top:20px;padding:20px 24px;
+  background:rgba(190,142,111,0.1);border:1px solid var(--terra);
+  font-size:13px;color:var(--terra);line-height:1.65;
+}
+
+/* ── PRINT TOOLBAR ── */
+.print-bar{
+  background:#0d0c09;border-bottom:1px solid var(--border);
+  padding:16px 56px;display:flex;align-items:center;gap:16px;
+}
+.print-bar p{font-size:12px;color:var(--muted);}
+.print-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--terra);padding:9px 20px;
+  font-size:11px;font-family:'Outfit',sans-serif;
+  font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  cursor:none;transition:all 0.25s;
+}
+.print-btn:hover{background:var(--terra);color:#fff;border-color:var(--terra);}
+.wa-share-btn{
+  background:transparent;border:1px solid rgba(37,211,102,0.3);
+  color:#25D366;padding:9px 20px;
+  font-size:11px;font-family:'Outfit',sans-serif;
+  font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  cursor:none;transition:all 0.25s;
+}
+.wa-share-btn:hover{background:#25D366;color:#fff;}
+
+/* ── CTA BAND ── */
+.cta-band{background:var(--terra);padding:90px 0;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.08) 0%,transparent 60%);}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5.5vw,60px);font-weight:300;color:#fff;margin-bottom:12px;position:relative;}
+.cta-band p{font-size:15px;color:rgba(255,255,255,0.7);margin-bottom:36px;position:relative;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.btn-white{background:#fff;color:var(--terra);padding:14px 36px;font-size:12px;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;cursor:none;display:inline-block;border:2px solid #fff;transition:all 0.3s;margin:0 8px;}
+.btn-white:hover{background:transparent;color:#fff;}
+.btn-outline-w{background:transparent;color:#fff;padding:14px 36px;font-size:12px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;cursor:none;border:1px solid rgba(255,255,255,0.5);display:inline-block;transition:all 0.3s;margin:0 8px;}
+.btn-outline-w:hover{background:rgba(255,255,255,0.1);border-color:#fff;}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:52px 56px 36px;border-top:1px solid var(--border);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;letter-spacing:0.18em;}
+.footer-slogan{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:4px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;cursor:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--terra);}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.18);}
+
+/* WA BUTTON */
+#wa-btn{position:fixed;bottom:28px;right:28px;z-index:200;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;border:none;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:all 0.3s;}
+#wa-btn:hover{transform:scale(1.1);}
+.wa-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(37,211,102,0.3);animation:waPulse 2.5s ease-in-out infinite;}
+@keyframes waPulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.5);opacity:0;}}
+#wa-btn svg{width:26px;height:26px;fill:#fff;position:relative;z-index:1;}
+
+/* PRINT STYLES */
+@media print{
+  #cursor-dot,#cursor-ring,nav,.print-bar,.toc-strip,.cta-band,footer,#wa-btn{display:none!important;}
+  body{background:#fff;color:#28251E;cursor:auto;}
+  .page-header{background:#1C1A15;padding:40px 56px 36px;}
+  #parties{background:#F7F0E6;padding:40px 0;}
+  #clauses{background:#fff;padding:40px 0;}
+  #signatures{background:#F6E7D1;padding:40px 0;}
+  .clauses-layout{grid-template-columns:1fr;}
+  .clauses-sidebar{display:none;}
+  .container{max-width:100%;padding:0 40px;}
+  .clause-item{page-break-inside:avoid;}
+  .pf-input,.fi-input,.sf-input,.clause-field{color:#28251E;border-bottom-color:#C8BFAE;}
+  .clause-body p,.clause-body li,.clause-highlight,.sig-intro p,.consent-block p{color:#5C5848;}
+  .party-field .pf-val,.clause-title,.section-title,.sig-party{color:#28251E;}
+  .ph-title,.ph-right p{color:#fff;}
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .clauses-layout{grid-template-columns:1fr;}
+  .clauses-sidebar{display:none;}
+  .ph-inner{grid-template-columns:1fr;gap:40px;}
+}
+@media(max-width:900px){
+  nav{padding:16px 24px;}.nav-links{display:none;}.hamburger{display:flex;}
+  .container,.page-header,.print-bar,.toc-strip{padding-left:24px;padding-right:24px;}
+  .parties-grid,.sig-grid{grid-template-columns:1fr;}
+  .fields-row-inline{grid-template-columns:1fr;}
+  footer{padding:40px 24px 28px;}
+}
+@media(max-width:600px){
+  .page-header{padding:130px 24px 60px;}
+  .ph-badges{flex-direction:column;}
+  .sig-field{grid-template-columns:70px 1fr;}
+  .btn-white,.btn-outline-w{margin:6px 0;}
+}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">MUR<em>A</em>QBA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="proposal.html">Proposal</a></li>
+    <li><a href="#clauses" class="active">Agreement</a></li>
+    <li><a href="#signatures">Sign</a></li>
+  </ul>
+  <a href="https://wa.link/vgvozv" class="nav-cta" target="_blank">Work With Us</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="pricing.html" onclick="closeMobile()">Pricing</a>
+  <a href="proposal.html" onclick="closeMobile()">Proposal</a>
+  <a href="#clauses" onclick="closeMobile()">Agreement Clauses</a>
+  <a href="#signatures" onclick="closeMobile()">Sign Agreement</a>
+  <a href="https://wa.link/vgvozv" target="_blank">WhatsApp ↗</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-label">Legal Document</div>
+      <h1 class="ph-title">Client Service<br/>Agreement</h1>
+      <div class="ph-bar"></div>
+    </div>
+    <div class="ph-right">
+      <p>This is MURAQBA's formal Digital Marketing Service Agreement. Please read all clauses carefully. Fill in the client details fields, review the terms, and sign digitally below — or save as PDF for physical signing.</p>
+      <div class="ph-badges">
+        <div class="ph-badge">◈ <span>Results-First Model</span></div>
+        <div class="ph-badge">◈ <span>30% Advance · 70% Post-Results</span></div>
+        <div class="ph-badge">◈ <span>3-Day Refund Window</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT TOOLBAR -->
+<div class="print-bar">
+  <p>To save a physical or PDF copy of this agreement:</p>
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF / Print</button>
+  <button class="wa-share-btn" onclick="shareOnWhatsApp()">↗ Share on WhatsApp</button>
+</div>
+
+<!-- TOC -->
+<div class="toc-strip">
+  <div class="toc-inner">
+    <a href="#parties" class="toc-link">Parties</a>
+    <a href="#clause-1" class="toc-link">1. Scope</a>
+    <a href="#clause-2" class="toc-link">2. Payment</a>
+    <a href="#clause-3" class="toc-link">3. Refunds</a>
+    <a href="#clause-4" class="toc-link">4. Revisions</a>
+    <a href="#clause-5" class="toc-link">5. Ownership</a>
+    <a href="#clause-6" class="toc-link">6. Duration</a>
+    <a href="#clause-7" class="toc-link">7. Confidentiality</a>
+    <a href="#clause-8" class="toc-link">8. Client Duties</a>
+    <a href="#clause-9" class="toc-link">9. Disputes</a>
+    <a href="#signatures" class="toc-link">Signatures</a>
+  </div>
+</div>
+
+<!-- PARTIES -->
+<section id="parties">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Agreement Between</div>
+      <h2 class="section-title">The Parties</h2>
+      <div class="section-bar"></div>
+    </div>
+    <div class="parties-grid reveal">
+      <!-- Service Provider -->
+      <div class="party-box">
+        <div class="party-lbl">Service Provider — MURAQBA</div>
+        <div class="party-field">
+          <span class="pf-label">Full Name</span>
+          <div class="pf-val">Shan Mushtaq (Founder, MURAQBA)</div>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Email</span>
+          <div class="pf-val">dearshanmushtaq@gmail.com</div>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Instagram / Facebook</span>
+          <div class="pf-val">@muraqba · muraqbaads</div>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Location</span>
+          <div class="pf-val">Kasur / Lahore, Punjab, Pakistan</div>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Agreement Date</span>
+          <div class="pf-val" id="agreeDate">[Date auto-fills on sign]</div>
+        </div>
+      </div>
+      <!-- Client (fillable) -->
+      <div class="party-box">
+        <div class="party-lbl">Client — Fill Your Details</div>
+        <div class="party-field">
+          <span class="pf-label">Full Name</span>
+          <input class="pf-input" id="c-name" type="text" placeholder="Your full name" oninput="syncSig()"/>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Brand / Business Name</span>
+          <input class="pf-input" id="c-brand" type="text" placeholder="Your brand or business name"/>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">WhatsApp / Contact</span>
+          <input class="pf-input" id="c-phone" type="tel" placeholder="+92 300 0000000"/>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Location</span>
+          <input class="pf-input" id="c-location" type="text" placeholder="City, Country"/>
+        </div>
+        <div class="party-field">
+          <span class="pf-label">Agreement No.</span>
+          <div class="pf-val" id="agreementNo">MRQ-<span id="agreeNum">---</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAUSES -->
+<section id="clauses">
+  <div class="container">
+    <div class="clauses-layout">
+
+      <!-- Sticky Sidebar -->
+      <div class="clauses-sidebar">
+        <div class="cs-title">Clauses</div>
+        <a href="#clause-1" class="cs-link"><div class="cs-num">1</div> Scope of Work</a>
+        <a href="#clause-2" class="cs-link"><div class="cs-num">2</div> Payment Terms</a>
+        <a href="#clause-3" class="cs-link"><div class="cs-num">3</div> Refund Policy</a>
+        <a href="#clause-4" class="cs-link"><div class="cs-num">4</div> Revision Policy</a>
+        <a href="#clause-5" class="cs-link"><div class="cs-num">5</div> Asset Ownership</a>
+        <a href="#clause-6" class="cs-link"><div class="cs-num">6</div> Duration & Exit</a>
+        <a href="#clause-7" class="cs-link"><div class="cs-num">7</div> Confidentiality</a>
+        <a href="#clause-8" class="cs-link"><div class="cs-num">8</div> Client Duties</a>
+        <a href="#clause-9" class="cs-link"><div class="cs-num">9</div> Disputes</a>
+      </div>
+
+      <!-- Clauses Body -->
+      <div>
+
+        <!-- CLAUSE 1 -->
+        <div class="clause-item reveal" id="clause-1">
+          <div class="clause-header">
+            <div class="clause-num-badge">1</div>
+            <div class="clause-title">Scope of Work</div>
+          </div>
+          <div class="clause-body">
+            <p>MURAQBA agrees to provide the following services to the client during the agreed contract period. Services outside this scope are not included unless added via a written addendum signed by both parties.</p>
+            <div class="fields-row-inline">
+              <div class="field-inline">
+                <div class="fi-label">Package Selected</div>
+                <input class="fi-input" id="s-package" type="text" placeholder="e.g. Growth — PKR 30,000/mo"/>
+              </div>
+              <div class="field-inline">
+                <div class="fi-label">Monthly Agency Fee</div>
+                <input class="fi-input" id="s-fee" type="text" placeholder="PKR ___________"/>
+              </div>
+            </div>
+            <div class="field-inline" style="margin-bottom:14px;">
+              <div class="fi-label">Services Included</div>
+              <textarea class="fi-input fi-textarea" id="s-services" placeholder="List the specific services agreed for this client..."></textarea>
+            </div>
+            <div class="field-inline">
+              <div class="fi-label">Agreed Milestone / Goal</div>
+              <input class="fi-input" id="s-goal" type="text" placeholder="e.g. 50 leads in 30 days / 100 new followers / first 20 sales"/>
+            </div>
+            <ul style="margin-top:16px;">
+              <li><strong>Not included:</strong> Full website development, product photography, guaranteed viral content, or campaigns with less than PKR 5,000/month ad budget.</li>
+              <li>Any additional service requested after signing must be agreed in writing and priced separately before execution.</li>
+              <li>MURAQBA reserves the right to decline requests outside the defined scope without penalty.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 2 -->
+        <div class="clause-item reveal" id="clause-2">
+          <div class="clause-header">
+            <div class="clause-num-badge">2</div>
+            <div class="clause-title">Payment Terms</div>
+          </div>
+          <div class="clause-body">
+            <div class="clause-highlight">
+              <strong>MURAQBA operates on a results-first model.</strong> The client pays a 30% advance upfront, and the remaining 70% is due only after the agreed milestone is achieved and demonstrated to the client.
+            </div>
+            <div class="fields-row-inline">
+              <div class="field-inline">
+                <div class="fi-label">Advance Amount (30%)</div>
+                <input class="fi-input" id="s-advance" type="text" placeholder="PKR ___________"/>
+              </div>
+              <div class="field-inline">
+                <div class="fi-label">Balance Amount (70%)</div>
+                <input class="fi-input" id="s-balance" type="text" placeholder="PKR ___________"/>
+              </div>
+            </div>
+            <ul>
+              <li><strong>Advance (30%):</strong> Due before work begins. Covers setup, onboarding, and initial content creation.</li>
+              <li><strong>Remaining (70%):</strong> Due within 3 days of milestone being achieved and demonstrated to the client.</li>
+              <li><strong>Ad Budget:</strong> The client's monthly ad spend (minimum PKR 5,000) is separate from the agency fee and is paid directly to Meta by the client.</li>
+              <li><strong>Late payment:</strong> Payments delayed beyond 5 days after milestone achievement may result in work being paused until settled.</li>
+              <li><strong>Currency:</strong> All fees are in Pakistani Rupees (PKR) unless otherwise agreed in writing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 3 -->
+        <div class="clause-item reveal" id="clause-3">
+          <div class="clause-header">
+            <div class="clause-num-badge">3</div>
+            <div class="clause-title">Refund Policy</div>
+          </div>
+          <div class="clause-body">
+            <p>MURAQBA takes client satisfaction seriously and operates with full transparency. The following refund terms apply:</p>
+            <ul>
+              <li><strong>Within 3 days of campaign launch:</strong> If the client is unsatisfied for any reasonable cause, the 30% advance is fully refundable.</li>
+              <li><strong>After 3 days:</strong> No refunds are issued. However, MURAQBA commits to continuing work until the agreed milestone is reached before collecting remaining payment.</li>
+              <li><strong>No refund</strong> is issued if the client fails to provide required assets, approvals, or access within agreed timelines, directly causing delays to campaign delivery.</li>
+              <li><strong>No refund</strong> is issued if the client terminates the agreement after work has begun, except within the 3-day campaign launch window above.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 4 -->
+        <div class="clause-item reveal" id="clause-4">
+          <div class="clause-header">
+            <div class="clause-num-badge">4</div>
+            <div class="clause-title">Revision Policy</div>
+          </div>
+          <div class="clause-body">
+            <ul>
+              <li><strong>Ad Campaigns:</strong> Ad creatives, audience targeting, bidding strategies, and all campaign management decisions are made and managed by MURAQBA professionally. Client revisions to ad campaigns are not included — this ensures results are not compromised by untested changes.</li>
+              <li><strong>Content Creation:</strong> Each client receives <strong>3 free revision rounds per month</strong> for posts, captions, and creatives.</li>
+              <li><strong>Additional revisions</strong> beyond 3 rounds per month are charged at PKR 500 per revision request.</li>
+              <li>Revision requests must be submitted within <strong>24 hours</strong> of content delivery. Content approved or not responded to within 24 hours will be published as-is.</li>
+              <li>Revision requests must be specific and actionable. General feedback such as "make it better" is not accepted without clear direction.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 5 -->
+        <div class="clause-item reveal" id="clause-5">
+          <div class="clause-header">
+            <div class="clause-num-badge">5</div>
+            <div class="clause-title">Ad Account & Asset Ownership</div>
+          </div>
+          <div class="clause-body">
+            <div class="clause-highlight">
+              The client retains full ownership of their Facebook page, Instagram account, Meta Ads account, and all brand assets at all times. MURAQBA is granted temporary access only.
+            </div>
+            <ul>
+              <li><strong>Client's accounts:</strong> All social media pages, ad accounts, and brand assets belong exclusively to the client. MURAQBA is granted temporary admin or manager access to manage campaigns on the client's behalf.</li>
+              <li><strong>Access removal:</strong> The client may remove MURAQBA's access at any time. Doing so will be treated as contract termination per Clause 6.</li>
+              <li><strong>Delivered content:</strong> Original content created by MURAQBA for the client becomes the client's property upon receipt of full payment.</li>
+              <li><strong>MURAQBA's intellectual property:</strong> Campaign strategies, templates, frameworks, and internal processes remain the intellectual property of MURAQBA and may not be resold or distributed by the client.</li>
+              <li><strong>Ad Spend Liability:</strong> Money spent on ads is managed at the client's own risk. MURAQBA holds no financial liability for ad spend outcomes beyond professional best-practice management.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 6 -->
+        <div class="clause-item reveal" id="clause-6">
+          <div class="clause-header">
+            <div class="clause-num-badge">6</div>
+            <div class="clause-title">Contract Duration & Termination</div>
+          </div>
+          <div class="clause-body">
+            <div class="fields-row-inline">
+              <div class="field-inline">
+                <div class="fi-label">Contract Start Date</div>
+                <input class="fi-input" id="s-start" type="date"/>
+              </div>
+              <div class="field-inline">
+                <div class="fi-label">Initial Duration</div>
+                <input class="fi-input" id="s-duration" type="text" value="30 days (renewable monthly)"/>
+              </div>
+            </div>
+            <ul style="margin-top:14px;">
+              <li>Either party may terminate this agreement with <strong>7 days written notice</strong> via WhatsApp message or email.</li>
+              <li>If the client terminates after work has begun beyond the 3-day refund window, the 30% advance is non-refundable.</li>
+              <li>MURAQBA may terminate the agreement immediately if the client: provides false product information, behaves disrespectfully toward MURAQBA staff, fails to provide required assets after 3 documented reminders, or violates any term of this agreement.</li>
+              <li>Upon termination, MURAQBA will remove admin access and deliver all completed work to the client within 48 hours, provided outstanding balances are settled.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 7 -->
+        <div class="clause-item reveal" id="clause-7">
+          <div class="clause-header">
+            <div class="clause-num-badge">7</div>
+            <div class="clause-title">Confidentiality</div>
+          </div>
+          <div class="clause-body">
+            <p>Both parties agree to maintain strict confidentiality over all shared business information for the duration of the agreement and for 2 years following its end. This includes:</p>
+            <ul>
+              <li>Client's product information, pricing, sales data, customer data, and business strategies</li>
+              <li>MURAQBA's proprietary campaign strategies, ad templates, targeting frameworks, and internal processes</li>
+              <li>Neither party will share the other's confidential information with any third party without prior written consent</li>
+              <li>MURAQBA may use anonymised, aggregated results (e.g. "increased leads by 40% in 30 days") for portfolio and marketing purposes — unless the client explicitly objects to this in writing within 7 days of signing</li>
+              <li>Breach of confidentiality by either party may result in immediate contract termination and legal remedy</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLAUSE 8 -->
+        <div class="clause-item reveal" id="clause-8">
+          <div class="clause-header">
+            <div class="clause-num-badge">8</div>
+            <div class="clause-title">Client Responsibilities</div>
+          </div>
+          <div class="clause-body">
+            <p>The client agrees to provide all of the following before MURAQBA begins work. Failure to provide these on time may delay results without penalty to MURAQBA:</p>
+            <ul>
+              <li>Minimum <strong>10 product photos or videos</strong> of acceptable quality — clear, well-lit, and product-focused</li>
+              <li>Facebook page and Instagram profile <strong>admin or manager access</strong> granted to MURAQBA within 24 hours of signing</li>
+              <li>Agreed monthly ad budget — separate from agency fee — <strong>minimum PKR 5,000</strong> available and ready</li>
+              <li>Timely responses to content approval requests within <strong>24 hours</strong> of delivery</li>
+              <li>Honest and accurate information about products, pricing, inventory, and business goals</li>
+              <li>A working WhatsApp number for primary day-to-day communication</li>
+            </ul>
+            <div class="clause-highlight">
+              Delays caused by the client's failure to provide required materials, approvals, or access will not be counted against MURAQBA's milestone timeline or used as grounds for refund claims.
+            </div>
+          </div>
+        </div>
+
+        <!-- CLAUSE 9 -->
+        <div class="clause-item reveal" id="clause-9">
+          <div class="clause-header">
+            <div class="clause-num-badge">9</div>
+            <div class="clause-title">Dispute Resolution</div>
+          </div>
+          <div class="clause-body">
+            <ul>
+              <li>Both parties agree to resolve any disputes through <strong>direct communication first</strong> — minimum 3 documented good-faith attempts via WhatsApp or email before escalation.</li>
+              <li>If direct resolution is unsuccessful within 14 days, both parties agree to seek a neutral <strong>mediator</strong> before pursuing any formal legal action.</li>
+              <li>This agreement is governed by the <strong>laws of Pakistan</strong>. Any legal proceedings, if required, will be conducted in Lahore, Punjab.</li>
+              <li>MURAQBA's total liability under this agreement shall not exceed the total fees paid by the client in the preceding 30-day period.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- end clauses body -->
+    </div><!-- end layout -->
+  </div>
+</section>
+
+<!-- SIGNATURES -->
+<section id="signatures">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Agreement & Signatures</div>
+      <h2 class="section-title">Sign the Agreement</h2>
+      <div class="section-bar"></div>
+    </div>
+    <div class="sig-intro reveal">
+      <p>By signing below, both parties confirm they have read, understood, and agreed to all 9 clauses of this Digital Marketing Service Agreement. This agreement becomes binding upon signature by both parties and receipt of the 30% advance payment.</p>
+    </div>
+    <div class="sig-grid reveal">
+      <!-- MURAQBA -->
+      <div class="sig-box">
+        <div class="sig-party">Service Provider — MURAQBA</div>
+        <div class="sig-line-wrap">
+          <div class="sig-line"></div>
+          <div class="sig-line-label">Signature of Service Provider</div>
+        </div>
+        <div class="sig-fields">
+          <div class="sig-field">
+            <div class="sf-label">Name:</div>
+            <div class="sf-input" style="border-bottom:1px solid rgba(255,255,255,0.1);padding:3px 0 5px;font-size:13px;color:var(--cream);">Shan Mushtaq</div>
+          </div>
+          <div class="sig-field">
+            <div class="sf-label">Title:</div>
+            <div class="sf-input" style="border-bottom:1px solid rgba(255,255,255,0.1);padding:3px 0 5px;font-size:13px;color:var(--cream);">Founder, MURAQBA</div>
+          </div>
+          <div class="sig-field">
+            <div class="sf-label">Date:</div>
+            <div class="sf-input" id="sigDate1" style="border-bottom:1px solid rgba(255,255,255,0.1);padding:3px 0 5px;font-size:13px;color:var(--cream);"></div>
+          </div>
+        </div>
+      </div>
+      <!-- CLIENT -->
+      <div class="sig-box">
+        <div class="sig-party">Client</div>
+        <div class="sig-line-wrap">
+          <div class="sig-line"></div>
+          <div class="sig-line-label">Signature of Client</div>
+        </div>
+        <div class="sig-fields">
+          <div class="sig-field">
+            <div class="sf-label">Name:</div>
+            <input class="sf-input" id="sig-name" type="text" placeholder="Your full name"/>
+          </div>
+          <div class="sig-field">
+            <div class="sf-label">Brand:</div>
+            <input class="sf-input" id="sig-brand" type="text" placeholder="Brand or business name"/>
+          </div>
+          <div class="sig-field">
+            <div class="sf-label">Date:</div>
+            <input class="sf-input" id="sig-date" type="date"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIGITAL CONSENT -->
+    <div class="consent-block reveal">
+      <h3>Digital Agreement Confirmation</h3>
+      <p>Ticking the boxes below and clicking confirm constitutes your digital acceptance of this agreement. This carries the same legal weight as a physical signature under Pakistani contract law for electronically concluded agreements.</p>
+      <div class="consent-check">
+        <input type="checkbox" id="check1"/>
+        <label for="check1">I confirm that I have read and fully understood all 9 clauses of this Digital Marketing Service Agreement.</label>
+      </div>
+      <div class="consent-check">
+        <input type="checkbox" id="check2"/>
+        <label for="check2">I agree to provide all required assets (minimum 10 product images, page access, ad budget) before work begins.</label>
+      </div>
+      <div class="consent-check">
+        <input type="checkbox" id="check3"/>
+        <label for="check3">I understand and accept the 30% advance — 70% post-results payment model, and the 3-day refund window.</label>
+      </div>
+      <div class="consent-check">
+        <input type="checkbox" id="check4"/>
+        <label for="check4">I agree that MURAQBA may use anonymised campaign results for portfolio purposes unless I notify them in writing within 7 days.</label>
+      </div>
+      <button class="sign-btn" onclick="submitAgreement()">Confirm & Sign Agreement →</button>
+      <div class="sign-success" id="signSuccess">
+        ◈ Agreement confirmed. Your digital signature has been recorded. Shan from MURAQBA will receive a notification and will contact you on WhatsApp within a few hours to confirm the 30% advance details and officially begin onboarding. Welcome to MURAQBA.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Questions about<br/>the agreement?</h2>
+    <p>Send us a message on WhatsApp and we'll clarify any clause before you sign.</p>
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:16px;position:relative;">
+      <a href="https://wa.link/vgvozv" class="btn-white" target="_blank">Ask on WhatsApp</a>
+      <a href="proposal.html" class="btn-outline-w">Back to Proposal</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div>
+      <div class="footer-brand">MURAQBA</div>
+      <div class="footer-slogan">WE OBSERVE · WE TARGET · WE SCALE</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="proposal.html">Proposal</a>
+      <a href="mailto:dearshanmushtaq@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">© 2026 MURAQBA · Kasur / Lahore, Pakistan</div>
+  </div>
+</footer>
+
+<button id="wa-btn" onclick="window.open('https://wa.link/vgvozv','_blank')" title="WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<script>
+/* ── CURSOR ── */
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+
+/* ── MOBILE MENU ── */
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',closeMobile);
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── TOC ACTIVE ── */
+const tocLinks=document.querySelectorAll('.toc-link');
+const clauseSections=document.querySelectorAll('.clause-item,[id]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  clauseSections.forEach(s=>{if(s.getBoundingClientRect().top<120)current=s.id;});
+  tocLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+current);});
+});
+
+/* ── SIDEBAR ACTIVE ── */
+const sideLinks=document.querySelectorAll('.cs-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  document.querySelectorAll('.clause-item').forEach(s=>{if(s.getBoundingClientRect().top<150)current=s.id;});
+  sideLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+current);});
+});
+
+/* ── AUTO-FILL DATES ── */
+(function(){
+  const now=new Date();
+  const fmt=now.toLocaleDateString('en-PK',{year:'numeric',month:'long',day:'numeric'});
+  const iso=now.toISOString().split('T')[0];
+  document.getElementById('sigDate1').textContent=fmt;
+  const dateField=document.getElementById('sig-date');
+  if(dateField)dateField.value=iso;
+  const startField=document.getElementById('s-start');
+  if(startField)startField.value=iso;
+  // Generate agreement number
+  const num='MRQ-'+now.getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000);
+  document.getElementById('agreeNum').textContent=num.replace('MRQ-','');
+  document.getElementById('agreeDate').textContent=fmt;
+})();
+
+/* ── SYNC SIGNATURES ── */
+function syncSig(){
+  const n=document.getElementById('c-name').value;
+  const b=document.getElementById('c-brand').value;
+  if(n){
+    const sn=document.getElementById('sig-name');
+    if(sn&&!sn.value)sn.value=n;
+  }
+  if(b){
+    const sb=document.getElementById('sig-brand');
+    if(sb&&!sb.value)sb.value=b;
+  }
+}
+
+/* ── SUBMIT AGREEMENT ── */
+function submitAgreement(){
+  const checks=[
+    document.getElementById('check1'),
+    document.getElementById('check2'),
+    document.getElementById('check3'),
+    document.getElementById('check4')
+  ];
+  const name=document.getElementById('sig-name').value||document.getElementById('c-name').value;
+  const brand=document.getElementById('sig-brand').value||document.getElementById('c-brand').value;
+
+  if(checks.some(c=>!c.checked)){
+    alert('Please tick all four confirmation boxes before signing.');
+    return;
+  }
+  if(!name||!brand){
+    alert('Please fill in your name and brand name in the Client fields above before signing.');
+    document.getElementById('parties').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+
+  // Build WhatsApp notification
+  const pkg=document.getElementById('s-package').value||'Not specified';
+  const fee=document.getElementById('s-fee').value||'Not specified';
+  const goal=document.getElementById('s-goal').value||'Not specified';
+  const adv=document.getElementById('s-advance').value||'Not specified';
+  const phone=document.getElementById('c-phone').value||'Not provided';
+  const msg=`🤝 *MURAQBA Agreement Signed*\n\nClient: ${name}\nBrand: ${brand}\nPhone: ${phone}\nPackage: ${pkg}\nFee: ${fee}\nAdvance: ${adv}\nGoal: ${goal}\n\nAll 4 consent boxes confirmed. Ready to begin onboarding.`;
+
+  window.open('https://wa.me/923000000000?text='+encodeURIComponent(msg),'_blank');
+
+  const succ=document.getElementById('signSuccess');
+  succ.style.display='block';
+  succ.scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelector('.sign-btn').disabled=true;
+  document.querySelector('.sign-btn').style.opacity='0.5';
+}
+
+/* ── SHARE ON WHATSAPP ── */
+function shareOnWhatsApp(){
+  const name=document.getElementById('c-name').value||'[Client]';
+  const brand=document.getElementById('c-brand').value||'[Brand]';
+  const msg=`Hi Shan, I've reviewed the MURAQBA Service Agreement. My details:\n\nName: ${name}\nBrand: ${brand}\n\nPlease send me the agreement to proceed.`;
+  window.open('https://wa.me/923000000000?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>

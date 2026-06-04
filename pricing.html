@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MURAQBA — Services & Pricing Menu</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231C1A15'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='38' fill='%23BE8E6F' font-family='serif'%3E%E2%97%88%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0A0906; --cream:#F7F0E6; --sand:#E2CCB0;
+  --terra:#BE8E6F; --sage:#9D9883; --oak:#8A8370;
+  --dark:#1C1A15; --mid:#2E2B22;
+  --body-text:rgba(255,255,255,0.52); --muted:rgba(255,255,255,0.32);
+  --faint:rgba(255,255,255,0.12); --border:rgba(190,142,111,0.18);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--terra);}
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(190,142,111,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease;}
+body:has(a:hover) #cursor-ring,body:has(button:hover) #cursor-ring{width:48px;height:48px;border-color:var(--terra);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 56px;background:rgba(10,9,6,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:#fff;letter-spacing:0.22em;text-decoration:none;cursor:none;}
+.nav-logo em{color:var(--terra);font-style:normal;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{text-decoration:none;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;cursor:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;padding:10px 22px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:none;transition:opacity 0.25s;display:inline-block;}
+.nav-cta:hover{opacity:0.85;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:transparent;padding:4px;}
+.hamburger span{display:block;width:24px;height:1px;background:var(--cream);transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,9,6,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--muted);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;cursor:none;}
+.mobile-menu a:hover{color:var(--terra);}
+.mobile-close{position:absolute;top:28px;right:28px;background:transparent;border:none;color:var(--muted);font-size:24px;cursor:none;}
+
+/* PAGE HEADER */
+.page-header{
+  padding:150px 56px 80px;
+  background:var(--dark);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(190,142,111,0.07) 0%,transparent 55%);}
+.ph-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;}
+.ph-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--terra);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.ph-label::before{content:'';display:block;width:28px;height:1px;background:var(--terra);}
+.ph-title{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,72px);font-weight:300;color:#fff;line-height:1.0;}
+.ph-bar{width:44px;height:1px;background:var(--terra);margin:18px 0 0;}
+.ph-right p{font-size:15px;color:var(--body-text);line-height:1.85;margin-bottom:20px;}
+.guarantee-badge{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;background:rgba(190,142,111,0.08);border:1px solid var(--border);font-size:12px;color:var(--terra);}
+.guarantee-badge span{font-weight:600;}
+
+/* SECTIONS */
+.container{max-width:1140px;margin:0 auto;padding:0 56px;}
+section{padding:100px 0;}
+.sec-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--terra);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.sec-label::before{content:'';display:block;width:28px;height:1px;background:var(--terra);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:#fff;line-height:1.1;}
+.sec-bar{width:44px;height:1px;background:var(--terra);margin:16px 0 40px;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* SERVICES LIST */
+#core-services{background:var(--ink);}
+.svc-list{margin-top:48px;}
+.svc-row{
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:32px;align-items:start;
+  padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.svc-row:last-child{border-bottom:none;}
+.svc-row:hover .svc-row-num{color:rgba(190,142,111,0.5);}
+.svc-row-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:300;
+  color:rgba(190,142,111,0.1);line-height:1;
+  transition:color 0.3s;min-width:60px;
+}
+.svc-row-body{}
+.svc-row-name{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;letter-spacing:0.02em;}
+.svc-row-desc{font-size:13px;color:var(--body-text);line-height:1.8;max-width:600px;}
+.svc-row-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+.svc-tag{padding:4px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;}
+.svc-row-meta{text-align:right;}
+.svc-timeline{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra);white-space:nowrap;}
+
+/* PACKAGES */
+#packages{background:#0c0b09;}
+.pkgs-intro{max-width:500px;margin-bottom:60px;}
+.pkgs-intro p{font-size:14px;color:var(--body-text);line-height:1.8;margin-top:12px;}
+.pkgs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pkg-card{
+  border:1px solid var(--border);padding:44px 32px;
+  position:relative;transition:all 0.35s;
+}
+.pkg-card:hover{transform:translateY(-4px);border-color:rgba(190,142,111,0.4);}
+.pkg-card.feat{border-color:var(--terra);background:rgba(190,142,111,0.04);}
+.feat-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--terra);color:#fff;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;padding:5px 16px;white-space:nowrap;}
+.pkg-tier{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--sage);margin-bottom:8px;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#fff;margin-bottom:26px;}
+.pkg-pkr{font-size:26px;font-weight:700;color:var(--terra);}
+.pkg-usd{font-size:12px;color:var(--sage);margin-top:4px;margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.pkg-items{list-style:none;margin-bottom:28px;}
+.pkg-items li{font-size:13px;color:var(--body-text);padding:8px 0 8px 20px;border-bottom:1px solid rgba(255,255,255,0.04);position:relative;line-height:1.5;}
+.pkg-items li::before{content:'—';position:absolute;left:0;color:var(--terra);font-size:10px;top:10px;}
+.pkg-best{font-size:11px;color:var(--sage);font-style:italic;margin-bottom:22px;}
+.pkg-cta{display:block;text-align:center;padding:13px;border:1px solid var(--border);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra);text-decoration:none;cursor:none;transition:all 0.25s;}
+.pkg-cta:hover,.pkg-card.feat .pkg-cta{background:var(--terra);color:#fff;border-color:var(--terra);}
+
+/* ADDONS */
+#addons{background:var(--ink);}
+.addons-table{margin-top:48px;border:1px solid var(--border);}
+.addons-header{display:grid;grid-template-columns:1fr auto;gap:24px;padding:14px 24px;background:rgba(190,142,111,0.08);border-bottom:1px solid var(--border);}
+.addons-header span{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);}
+.addon-row{display:grid;grid-template-columns:1fr auto;gap:24px;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.05);align-items:center;transition:background 0.25s;}
+.addon-row:last-child{border-bottom:none;}
+.addon-row:hover{background:rgba(255,255,255,0.02);}
+.addon-name{font-size:14px;color:var(--cream);font-weight:500;}
+.addon-desc{font-size:12px;color:var(--body-text);margin-top:4px;line-height:1.5;}
+.addon-price{font-size:16px;font-weight:700;color:var(--terra);white-space:nowrap;text-align:right;}
+
+/* TERMS */
+#terms{background:#0c0b09;}
+.terms-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
+.term-block{padding:32px;border:1px solid var(--border);}
+.term-block h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:0.04em;text-transform:uppercase;}
+.term-block ul{list-style:none;}
+.term-block li{font-size:13px;color:var(--body-text);padding:8px 0 8px 20px;border-bottom:1px solid rgba(255,255,255,0.05);position:relative;line-height:1.6;}
+.term-block li:last-child{border-bottom:none;}
+.term-block li::before{content:'◈';position:absolute;left:0;color:var(--terra);font-size:8px;top:11px;}
+.term-block li strong{color:var(--cream);}
+
+/* SCOPE */
+.scope-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
+.scope-block{padding:32px;border:1px solid var(--border);}
+.scope-block.in{border-color:rgba(190,142,111,0.3);}
+.scope-block.out{border-color:rgba(255,70,70,0.15);}
+.scope-block h3{font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
+.scope-block.in h3{color:var(--terra);}
+.scope-block.out h3{color:rgba(220,80,80,0.7);}
+.scope-block li{font-size:13px;color:var(--body-text);padding:8px 0 8px 22px;border-bottom:1px solid rgba(255,255,255,0.04);list-style:none;position:relative;line-height:1.55;}
+.scope-block li:last-child{border-bottom:none;}
+.scope-block.in li::before{content:'✓';position:absolute;left:0;color:var(--terra);}
+.scope-block.out li::before{content:'✕';position:absolute;left:0;color:rgba(220,80,80,0.6);}
+
+/* CTA FOOTER */
+.page-cta{background:var(--terra);padding:80px 0;text-align:center;}
+.page-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;color:#fff;margin-bottom:12px;}
+.page-cta p{font-size:15px;color:rgba(255,255,255,0.7);margin-bottom:36px;}
+.btn-white{background:#fff;color:var(--terra);padding:14px 36px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;cursor:none;display:inline-block;border:2px solid #fff;transition:all 0.3s;margin:0 8px;}
+.btn-white:hover{background:transparent;color:#fff;}
+.btn-outline-w{background:transparent;color:#fff;padding:14px 36px;font-size:11px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;cursor:none;border:1px solid rgba(255,255,255,0.5);display:inline-block;transition:all 0.3s;margin:0 8px;}
+.btn-outline-w:hover{background:rgba(255,255,255,0.1);border-color:#fff;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:52px 56px 36px;border-top:1px solid var(--border);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;letter-spacing:0.18em;}
+.footer-slogan{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:4px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;cursor:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--terra);}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.18);}
+#wa-btn{position:fixed;bottom:28px;right:28px;z-index:200;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;border:none;box-shadow:0 4px 24px rgba(37,211,102,0.3);transition:all 0.3s;}
+#wa-btn:hover{transform:scale(1.1);}
+.wa-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(37,211,102,0.3);animation:waPulse 2.5s ease-in-out infinite;}
+@keyframes waPulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.5);opacity:0;}}
+#wa-btn svg{width:26px;height:26px;fill:#fff;position:relative;z-index:1;}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}.nav-links{display:none;}.hamburger{display:flex;}
+  .container,.page-header{padding-left:24px;padding-right:24px;}
+  .ph-inner{grid-template-columns:1fr;gap:32px;}
+  .pkgs-grid{grid-template-columns:1fr;}
+  .terms-grid,.scope-row{grid-template-columns:1fr;}
+  footer{padding:40px 24px 28px;}
+  .svc-row{grid-template-columns:auto 1fr;}.svc-row-meta{display:none;}
+}
+@media(max-width:600px){
+  .page-header{padding:130px 24px 60px;}
+  section{padding:72px 0;}
+  .btn-white,.btn-outline-w{margin:6px 0;}
+}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">MUR<em>A</em>QBA</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#core-services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#addons">Add-Ons</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="proposal.html">Proposal</a></li>
+    <li><a href="contract.html">Agreement</a></li>
+  </ul>
+  <a href="https://wa.link/vgvozv" class="nav-cta" target="_blank">Work With Us</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="#core-services" onclick="closeMobile()">Services</a>
+  <a href="#packages" onclick="closeMobile()">Packages</a>
+  <a href="#addons" onclick="closeMobile()">Add-Ons</a>
+  <a href="proposal.html" onclick="closeMobile()">Proposal</a>
+  <a href="contract.html" onclick="closeMobile()">Agreement</a>
+  <a href="https://wa.link/vgvozv" target="_blank">WhatsApp ↗</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-label">Services & Pricing</div>
+      <h1 class="ph-title">Everything<br/>We Do &<br/>What It Costs</h1>
+      <div class="ph-bar"></div>
+    </div>
+    <div class="ph-right">
+      <p>A complete breakdown of all MURAQBA services, monthly packages, add-on options, and what's included in each. Every price is backed by our results-first model.</p>
+      <div class="guarantee-badge">◈ <span>30% Advance · 70% After Agreed Results</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CORE SERVICES -->
+<section id="core-services">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">01 — Core Services</div>
+      <h2 class="sec-title">What We Offer</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="svc-list">
+      <div class="svc-row reveal">
+        <div class="svc-row-num">01</div>
+        <div class="svc-row-body">
+          <div class="svc-row-name">Facebook & Instagram Ads Management</div>
+          <div class="svc-row-desc">Full campaign creation, precision audience targeting, A/B tested ad creatives, weekly performance optimisation, and detailed monthly reporting. Every aspect of your paid advertising is managed so you can focus on your business.</div>
+          <div class="svc-row-tags">
+            <span class="svc-tag">Campaign Setup</span>
+            <span class="svc-tag">Audience Targeting</span>
+            <span class="svc-tag">A/B Testing</span>
+            <span class="svc-tag">Weekly Optimisation</span>
+            <span class="svc-tag">Performance Reports</span>
+          </div>
+        </div>
+        <div class="svc-row-meta"><div class="svc-timeline">Ongoing / Monthly</div></div>
+      </div>
+      <div class="svc-row reveal">
+        <div class="svc-row-num">02</div>
+        <div class="svc-row-body">
+          <div class="svc-row-name">Full Brand Setup from Scratch</div>
+          <div class="svc-row-desc">Facebook page + Instagram profile setup, professional bio writing, highlights creation, profile and cover design direction, and link-in-bio configuration. Your brand goes live looking polished and professional.</div>
+          <div class="svc-row-tags">
+            <span class="svc-tag">Page Setup</span>
+            <span class="svc-tag">Bio Writing</span>
+            <span class="svc-tag">Highlights Design</span>
+            <span class="svc-tag">Cover Design</span>
+            <span class="svc-tag">Link in Bio</span>
+          </div>
+        </div>
+        <div class="svc-row-meta"><div class="svc-timeline">3–5 Days</div></div>
+      </div>
+      <div class="svc-row reveal">
+        <div class="svc-row-num">03</div>
+        <div class="svc-row-body">
+          <div class="svc-row-name">Content Creation & Posting</div>
+          <div class="svc-row-desc">12–16 professionally crafted posts per month including captions, hashtag research, content calendar planning, and stories. All content is tailored to your brand voice, niche, and target audience.</div>
+          <div class="svc-row-tags">
+            <span class="svc-tag">12–16 Posts / Month</span>
+            <span class="svc-tag">Captions</span>
+            <span class="svc-tag">Hashtag Research</span>
+            <span class="svc-tag">Content Calendar</span>
+            <span class="svc-tag">Stories</span>
+          </div>
+        </div>
+        <div class="svc-row-meta"><div class="svc-timeline">Monthly</div></div>
+      </div>
+      <div class="svc-row reveal">
+        <div class="svc-row-num">04</div>
+        <div class="svc-row-body">
+          <div class="svc-row-name">Lead Generation Campaigns</div>
+          <div class="svc-row-desc">Targeted ad campaigns built specifically to generate real leads and purchase inquiries — not just likes or impressions. Every campaign is optimised toward your agreed lead goal with conversion tracking enabled.</div>
+          <div class="svc-row-tags">
+            <span class="svc-tag">Lead Gen Ads</span>
+            <span class="svc-tag">Retargeting</span>
+            <span class="svc-tag">Conversion Tracking</span>
+            <span class="svc-tag">Pixel Setup</span>
+          </div>
+        </div>
+        <div class="svc-row-meta"><div class="svc-timeline">Ongoing</div></div>
+      </div>
+      <div class="svc-row reveal">
+        <div class="svc-row-num">05</div>
+        <div class="svc-row-body">
+          <div class="svc-row-name">Brand Roadmap Consultation</div>
+          <div class="svc-row-desc">A 7-day action plan and 30-day growth roadmap delivered to new brands who need direction before launching campaigns. Includes competitor analysis, audience profiling, and a clear priority checklist to execute immediately.</div>
+          <div class="svc-row-tags">
+            <span class="svc-tag">7-Day Action Plan</span>
+            <span class="svc-tag">30-Day Roadmap</span>
+            <span class="svc-tag">Competitor Analysis</span>
+            <span class="svc-tag">Audience Profile</span>
+          </div>
+        </div>
+        <div class="svc-row-meta"><div class="svc-timeline">1–2 Days</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="container">
+    <div class="pkgs-intro reveal">
+      <div class="sec-label">02 — Monthly Packages</div>
+      <h2 class="sec-title">Choose Your Package</h2>
+      <div class="sec-bar"></div>
+      <p>All packages operate on the results-first model. 30% advance at onboarding — remaining 70% only after the agreed milestone is achieved and demonstrated.</p>
+    </div>
+    <div class="pkgs-grid">
+      <div class="pkg-card reveal">
+        <div class="pkg-tier">Package 01</div>
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-pkr">PKR 15,000 / mo</div>
+        <div class="pkg-usd">≈ $54 USD / month</div>
+        <ul class="pkg-items">
+          <li>Brand setup (Facebook page + Instagram profile)</li>
+          <li>8 posts per month</li>
+          <li>Basic page management</li>
+          <li>Monthly performance snapshot</li>
+          <li>WhatsApp progress updates</li>
+        </ul>
+        <div class="pkg-best">Best for: New brands with zero online presence</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started →</a>
+      </div>
+      <div class="pkg-card feat reveal" style="transition-delay:0.12s">
+        <div class="feat-badge">Most Popular</div>
+        <div class="pkg-tier">Package 02</div>
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-pkr">PKR 30,000 / mo</div>
+        <div class="pkg-usd">≈ $107 USD / month</div>
+        <ul class="pkg-items">
+          <li>16 posts per month</li>
+          <li>Facebook Ads management (up to PKR 10k budget)</li>
+          <li>Monthly analytics report + analysis</li>
+          <li>30-day brand roadmap included</li>
+          <li>Bi-weekly performance updates</li>
+        </ul>
+        <div class="pkg-best">Best for: Brands ready to run paid advertising</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started →</a>
+      </div>
+      <div class="pkg-card reveal" style="transition-delay:0.24s">
+        <div class="pkg-tier">Package 03</div>
+        <div class="pkg-name">Scale</div>
+        <div class="pkg-pkr">PKR 55,000 / mo</div>
+        <div class="pkg-usd">≈ $197 USD / month</div>
+        <ul class="pkg-items">
+          <li>Everything in Growth package</li>
+          <li>Lead generation campaigns</li>
+          <li>Full content calendar</li>
+          <li>Bi-weekly strategy calls</li>
+          <li>Monthly performance review</li>
+          <li>Priority WhatsApp support</li>
+        </ul>
+        <div class="pkg-best">Best for: Serious brands wanting consistent leads</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section id="addons">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">03 — Add-On Services</div>
+      <h2 class="sec-title">Extend Your Package</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="addons-table reveal">
+      <div class="addons-header">
+        <span>Service</span><span>Price</span>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Extra Content Post</div><div class="addon-desc">Additional post beyond your monthly package limit. Same quality and brand alignment.</div></div>
+        <div class="addon-price">PKR 800 / post</div>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Reel / Short Video Edit</div><div class="addon-desc">Professionally edited Reel or short-form video for your Instagram or Facebook.</div></div>
+        <div class="addon-price">PKR 1,500 / video</div>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Extra Revision Round</div><div class="addon-desc">Content revision beyond the 3 free rounds included in your monthly package.</div></div>
+        <div class="addon-price">PKR 500 / round</div>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Extra Strategy Call</div><div class="addon-desc">One-on-one strategic call beyond your included calls. Via WhatsApp or Google Meet.</div></div>
+        <div class="addon-price">PKR 1,000 / call</div>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Competitor Analysis Report</div><div class="addon-desc">In-depth analysis of up to 5 competitors — content strategy, ad approach, and positioning gaps.</div></div>
+        <div class="addon-price">PKR 3,000 flat</div>
+      </div>
+      <div class="addon-row">
+        <div><div class="addon-name">Emergency 24hr Turnaround</div><div class="addon-desc">Priority rush service for urgent content, creative, or campaign adjustments within 24 hours.</div></div>
+        <div class="addon-price">PKR 2,000 flat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE BOUNDARIES -->
+<section id="scope">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">04 — Scope Boundaries</div>
+      <h2 class="sec-title">What's In & Out</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="scope-row">
+      <div class="scope-block in reveal">
+        <h3>What MURAQBA Provides</h3>
+        <ul>
+          <li>Facebook & Instagram ad campaign management</li>
+          <li>Content creation (posts, captions, stories)</li>
+          <li>Full brand setup from scratch</li>
+          <li>Lead generation campaigns</li>
+          <li>Monthly performance reporting</li>
+          <li>Strategy sessions and brand roadmap</li>
+          <li>WhatsApp communication and updates</li>
+        </ul>
+      </div>
+      <div class="scope-block out reveal" style="transition-delay:0.1s">
+        <h3>What Is Not Included</h3>
+        <ul>
+          <li>Full-scale website development</li>
+          <li>Product photography or video shoots</li>
+          <li>Guaranteed viral content (no agency can)</li>
+          <li>Ad campaigns under PKR 5,000/month budget</li>
+          <li>Work without minimum 10 product images</li>
+          <li>Instant results in 3–5 days</li>
+          <li>Any service not agreed in writing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section id="terms">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">05 — Terms & Conditions</div>
+      <h2 class="sec-title">How We Work</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="terms-grid">
+      <div class="term-block reveal">
+        <h3>Payment Terms</h3>
+        <ul>
+          <li><strong>30% advance</strong> required before work begins to cover setup costs</li>
+          <li>Remaining <strong>70% due only after</strong> agreed milestone is achieved</li>
+          <li>Ad budget is separate from agency fee and paid directly by client</li>
+          <li>Minimum ad budget of <strong>PKR 5,000/month</strong> required for campaigns</li>
+          <li>Late payment (5+ days after milestone) may result in work pause</li>
+        </ul>
+      </div>
+      <div class="term-block reveal" style="transition-delay:0.1s">
+        <h3>Content & Revisions</h3>
+        <ul>
+          <li>Content creation includes <strong>3 free revision rounds</strong> per month</li>
+          <li>Revision requests within <strong>24 hours</strong> of content delivery</li>
+          <li>Approved content published as-is after 24 hours</li>
+          <li>Additional revisions charged at PKR 500 per round</li>
+          <li>Ad creative decisions managed by MURAQBA professionally</li>
+        </ul>
+      </div>
+      <div class="term-block reveal">
+        <h3>Client Requirements</h3>
+        <ul>
+          <li>Minimum <strong>10 product photos or videos</strong> before work begins</li>
+          <li>Facebook page and Instagram admin access required</li>
+          <li>Timely responses to content approval (within 24 hours)</li>
+          <li>WhatsApp number for primary communication</li>
+          <li>Honest information about products, pricing, and goals</li>
+        </ul>
+      </div>
+      <div class="term-block reveal" style="transition-delay:0.1s">
+        <h3>Refund & Termination</h3>
+        <ul>
+          <li>Refund available within <strong>3 days</strong> of campaign launch if unsatisfied</li>
+          <li>After 3 days: no refund but work continues to milestone</li>
+          <li>Either party may terminate with <strong>7 days written notice</strong></li>
+          <li>All completed work delivered to client within 48 hours of exit</li>
+          <li>Prices valid for 2026 — subject to review for new contracts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE CTA -->
+<div class="page-cta">
+  <div class="container">
+    <h2>Ready to start?</h2>
+    <p>Choose your package and let's agree on your milestone together.</p>
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.link/vgvozv" class="btn-white" target="_blank">WhatsApp Us Now</a>
+      <a href="contract.html" class="btn-outline-w">View Agreement</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div>
+      <div class="footer-brand">MURAQBA</div>
+      <div class="footer-slogan">WE OBSERVE · WE TARGET · WE SCALE</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="proposal.html">Proposal</a>
+      <a href="contract.html">Agreement</a>
+      <a href="mailto:dearshanmushtaq@gmail.com">Email Us</a>
+    </div>
+    <div class="footer-copy">© 2026 MURAQBA · Kasur / Lahore, Pakistan</div>
+  </div>
+</footer>
+
+<button id="wa-btn" onclick="window.open('https://wa.link/vgvozv','_blank')" title="WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<script>
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',closeMobile);
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

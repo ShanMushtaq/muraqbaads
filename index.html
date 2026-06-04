@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MURAQBA — We Observe. We Target. We Scale.</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231C1A15'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='38' fill='%23BE8E6F' font-family='serif'%3E%E2%97%88%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════
+   RESET & ROOT
+════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0A0906;
+  --cream:#F7F0E6;
+  --sand:#E2CCB0;
+  --terra:#BE8E6F;
+  --terra-dark:#a0704e;
+  --sage:#9D9883;
+  --oak:#8A8370;
+  --dark:#1C1A15;
+  --mid:#2E2B22;
+  --parchment:#F6E7D1;
+  --pearl:#E8E9E1;
+  --mist:#CDD1C8;
+  --body-text:rgba(255,255,255,0.55);
+  --muted:rgba(255,255,255,0.35);
+  --faint:rgba(255,255,255,0.15);
+  --border:rgba(190,142,111,0.18);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--ink);
+  color:var(--cream);
+  overflow-x:hidden;
+  cursor:none;
+}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--terra);border-radius:2px;}
+
+/* ════════════════════════════════════════
+   CUSTOM CURSOR
+════════════════════════════════════════ */
+#cursor-dot{
+  position:fixed;width:8px;height:8px;
+  background:var(--terra);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.08s;
+}
+#cursor-ring{
+  position:fixed;width:32px;height:32px;
+  border:1px solid rgba(190,142,111,0.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:all 0.18s ease;
+}
+body:has(a:hover) #cursor-ring,
+body:has(button:hover) #cursor-ring{
+  width:48px;height:48px;
+  border-color:var(--terra);
+  background:rgba(190,142,111,0.06);
+}
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:24px 56px;
+  transition:all 0.4s ease;
+}
+nav.scrolled{
+  background:rgba(10,9,6,0.92);
+  backdrop-filter:blur(20px);
+  padding:14px 56px;
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:500;
+  color:#fff;letter-spacing:0.22em;
+  text-decoration:none;cursor:none;
+}
+.nav-logo em{color:var(--terra);font-style:normal;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{
+  text-decoration:none;font-size:11px;
+  font-weight:400;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--muted);
+  transition:color 0.2s;cursor:none;
+}
+.nav-links a:hover{color:var(--terra);}
+.nav-links a.active{color:var(--cream);}
+.nav-cta{
+  background:transparent;border:1px solid var(--terra);
+  color:var(--terra);padding:10px 24px;
+  font-size:11px;font-family:'Outfit',sans-serif;
+  font-weight:500;letter-spacing:0.16em;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  transition:all 0.25s;display:inline-block;
+}
+.nav-cta:hover{background:var(--terra);color:#fff;}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:none;border:none;background:transparent;
+  padding:4px;
+}
+.hamburger span{
+  display:block;width:24px;height:1px;
+  background:var(--cream);transition:all 0.3s;
+}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:rgba(10,9,6,0.97);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:32px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:300;color:var(--muted);
+  text-decoration:none;letter-spacing:0.08em;
+  transition:color 0.2s;cursor:none;
+}
+.mobile-menu a:hover{color:var(--terra);}
+.mobile-close{
+  position:absolute;top:28px;right:28px;
+  background:transparent;border:none;
+  color:var(--muted);font-size:24px;cursor:none;
+}
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 65% 40%, rgba(190,142,111,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 70%, rgba(157,152,131,0.06) 0%, transparent 50%),
+    var(--ink);
+}
+/* Grain overlay */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:0.6;
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(190,142,111,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190,142,111,0.04) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse at center, rgba(0,0,0,0.3) 30%, transparent 80%);
+}
+.hero-content{
+  position:relative;z-index:10;
+  text-align:center;padding:0 24px;
+  max-width:900px;
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:28px;
+  opacity:0;animation:fadeUp 1s 0.2s ease forwards;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:36px;height:1px;background:var(--terra);opacity:0.5;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(56px,11vw,108px);
+  font-weight:300;letter-spacing:0.14em;
+  line-height:0.95;color:#fff;
+  opacity:0;animation:fadeUp 1.1s 0.4s ease forwards;
+}
+.hero-title-accent{
+  font-style:italic;color:var(--terra);
+  display:block;font-size:0.5em;
+  letter-spacing:0.3em;margin-top:8px;
+  font-weight:300;
+}
+.hero-divider{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom, transparent, var(--terra), transparent);
+  margin:28px auto;
+  opacity:0;animation:fadeUp 1s 0.7s ease forwards;
+}
+.hero-slogan{
+  font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--muted);
+  opacity:0;animation:fadeUp 1s 0.9s ease forwards;
+  margin-bottom:44px;
+}
+.hero-actions{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 1s 1.1s ease forwards;
+}
+.btn-primary{
+  background:var(--terra);color:#fff;
+  padding:14px 36px;font-size:11px;
+  font-family:'Outfit',sans-serif;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  border:1px solid var(--terra);
+  transition:all 0.3s;position:relative;overflow:hidden;
+  display:inline-block;
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0.1);
+  transform:translateX(-100%);transition:transform 0.3s;
+}
+.btn-primary:hover::before{transform:translateX(0);}
+.btn-secondary{
+  background:transparent;color:var(--cream);
+  padding:14px 36px;font-size:11px;
+  font-family:'Outfit',sans-serif;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  border:1px solid var(--faint);
+  transition:all 0.3s;display:inline-block;
+}
+.btn-secondary:hover{border-color:var(--sand);color:#fff;}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeUp 1s 1.4s ease forwards;
+  cursor:none;text-decoration:none;
+}
+.hero-scroll span{
+  font-size:9px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--muted);
+}
+.scroll-bar{
+  width:1px;height:44px;
+  background:linear-gradient(to bottom, var(--terra), transparent);
+  animation:scrollAnim 2s ease-in-out infinite;
+}
+@keyframes scrollAnim{
+  0%,100%{opacity:0.3;transform:scaleY(0.5);transform-origin:top;}
+  50%{opacity:1;transform:scaleY(1);}
+}
+/* Floating orbs */
+.hero-orb{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle, rgba(190,142,111,0.08) 0%, transparent 70%);
+  pointer-events:none;
+  animation:orbFloat 8s ease-in-out infinite;
+}
+.hero-orb:nth-child(1){width:400px;height:400px;top:-100px;right:-80px;animation-delay:0s;}
+.hero-orb:nth-child(2){width:300px;height:300px;bottom:-60px;left:-60px;animation-delay:-3s;}
+@keyframes orbFloat{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-20px) scale(1.05);}
+}
+
+/* ════════════════════════════════════════
+   MARQUEE STRIP
+════════════════════════════════════════ */
+.marquee-strip{
+  background:var(--terra);
+  padding:18px 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.marquee-track{
+  display:flex;gap:52px;white-space:nowrap;
+  animation:marquee 20s linear infinite;
+}
+.marquee-track span{
+  font-size:10px;letter-spacing:0.3em;
+  text-transform:uppercase;color:#fff;font-weight:600;
+}
+.marquee-track .sep{color:rgba(255,255,255,0.4);font-size:14px;}
+@keyframes marquee{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ════════════════════════════════════════
+   SECTIONS SHARED
+════════════════════════════════════════ */
+section{padding:130px 0;}
+.container{max-width:1140px;margin:0 auto;padding:0 56px;}
+.sec-label{
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::before{
+  content:'';display:block;width:28px;height:1px;background:var(--terra);
+}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,5vw,58px);
+  font-weight:400;color:#fff;
+  line-height:1.05;
+}
+.sec-bar{
+  width:44px;height:1px;background:var(--terra);
+  margin:18px 0 40px;
+}
+
+/* Reveal animations */
+.reveal{
+  opacity:0;transform:translateY(36px);
+  transition:opacity 0.85s ease,transform 0.85s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-left{
+  opacity:0;transform:translateX(-36px);
+  transition:opacity 0.85s ease,transform 0.85s ease;
+}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+.reveal-right{
+  opacity:0;transform:translateX(36px);
+  transition:opacity 0.85s ease,transform 0.85s ease;
+}
+.reveal-right.in{opacity:1;transform:translateX(0);}
+
+/* ════════════════════════════════════════
+   ABOUT SECTION
+════════════════════════════════════════ */
+#about{background:var(--ink);}
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:100px;align-items:center;
+}
+.about-text .sec-title{font-size:clamp(34px,4.5vw,52px);}
+.about-text p{
+  font-size:15px;line-height:1.9;
+  color:var(--body-text);margin-bottom:20px;
+}
+.about-text p strong{color:var(--cream);}
+.about-usp{
+  margin-top:36px;
+  padding:22px 26px;
+  background:rgba(190,142,111,0.07);
+  border:1px solid var(--border);
+  border-left:3px solid var(--terra);
+}
+.about-usp p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;
+  color:var(--sand);line-height:1.6;
+  margin:0;
+}
+.about-cta{margin-top:32px;}
+.stats-block{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+}
+.stat-cell{
+  padding:40px 30px;background:var(--ink);
+  text-align:center;position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.stat-cell:hover{background:#0f0e0b;}
+.stat-cell::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--terra),transparent);
+  transform:scaleX(0);transition:transform 0.4s;
+}
+.stat-cell:hover::after{transform:scaleX(1);}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:300;
+  color:var(--terra);line-height:1;
+}
+.stat-l{
+  font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--sage);
+  margin-top:8px;
+}
+
+/* ════════════════════════════════════════
+   USP STRIP
+════════════════════════════════════════ */
+.usp-strip{
+  background:var(--dark);
+  padding:72px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.usp-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+}
+.usp-item{
+  padding:44px 36px;background:var(--dark);
+  position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.usp-item::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--terra),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.usp-item:hover::before{transform:scaleX(1);}
+.usp-item:hover{background:#1e1c16;}
+.usp-icon{
+  width:44px;height:44px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;margin-bottom:20px;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--terra);
+}
+.usp-name{
+  font-size:16px;font-weight:600;
+  color:#fff;margin-bottom:10px;
+}
+.usp-desc{
+  font-size:13px;line-height:1.75;
+  color:var(--body-text);
+}
+.usp-tag{
+  display:inline-block;margin-top:16px;
+  font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;padding:4px 10px;
+  background:rgba(190,142,111,0.1);
+  color:var(--terra);
+}
+
+/* ════════════════════════════════════════
+   SERVICES SECTION
+════════════════════════════════════════ */
+#services{background:#0c0b09;}
+.services-intro{max-width:540px;margin-bottom:72px;}
+.services-intro p{
+  font-size:15px;color:var(--body-text);
+  line-height:1.8;margin-top:14px;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,0.05);
+  margin-bottom:56px;
+}
+.svc-card{
+  background:#0c0b09;padding:42px 32px;
+  border-bottom:2px solid transparent;
+  position:relative;overflow:hidden;
+  transition:all 0.4s;
+}
+.svc-card::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--terra);
+  transform:scaleX(0);transition:transform 0.4s;
+}
+.svc-card:hover{background:#100f0c;}
+.svc-card:hover::after{transform:scaleX(1);}
+.svc-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:300;
+  color:rgba(190,142,111,0.12);
+  line-height:1;margin-bottom:18px;
+  transition:color 0.4s;
+}
+.svc-card:hover .svc-num{color:rgba(190,142,111,0.35);}
+.svc-name{
+  font-size:15px;font-weight:600;
+  color:#fff;margin-bottom:12px;
+  letter-spacing:0.02em;
+}
+.svc-desc{
+  font-size:13px;line-height:1.75;
+  color:rgba(255,255,255,0.38);
+}
+.svc-timeline{
+  margin-top:16px;font-size:9px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--terra);opacity:0.7;
+}
+/* Addons row */
+.addons-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.addon-pill{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  transition:border-color 0.3s;
+}
+.addon-pill:hover{border-color:var(--border);}
+.addon-n{font-size:12px;color:rgba(255,255,255,0.55);}
+.addon-p{
+  font-size:12px;color:var(--terra);
+  font-weight:600;
+}
+.services-cta{
+  text-align:center;margin-top:60px;
+  padding-top:60px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.services-cta p{
+  font-size:14px;color:var(--body-text);
+  margin-bottom:24px;
+}
+
+/* ════════════════════════════════════════
+   PRICING SECTION
+════════════════════════════════════════ */
+#pricing{background:var(--ink);}
+.pricing-note{
+  font-size:14px;color:var(--body-text);
+  max-width:480px;margin-top:12px;
+  line-height:1.75;
+}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;margin-top:60px;
+}
+.pkg-card{
+  border:1px solid var(--border);
+  padding:44px 32px;
+  position:relative;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.pkg-card:hover{
+  border-color:rgba(190,142,111,0.4);
+  transform:translateY(-4px);
+}
+.pkg-card.featured{
+  border-color:var(--terra);
+  background:rgba(190,142,111,0.04);
+}
+.pkg-badge{
+  position:absolute;top:-1px;left:50%;
+  transform:translateX(-50%);
+  background:var(--terra);color:#fff;
+  font-size:8px;letter-spacing:0.2em;
+  text-transform:uppercase;padding:5px 16px;
+  white-space:nowrap;
+}
+.pkg-tier{
+  font-size:9px;letter-spacing:0.24em;
+  text-transform:uppercase;color:var(--sage);
+  margin-bottom:8px;
+}
+.pkg-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;font-weight:400;
+  color:#fff;margin-bottom:24px;
+}
+.pkg-price-pkr{
+  font-size:24px;font-weight:700;color:var(--terra);
+}
+.pkg-price-usd{
+  font-size:12px;color:var(--sage);
+  margin-top:4px;margin-bottom:24px;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.pkg-items{list-style:none;margin-bottom:24px;}
+.pkg-items li{
+  font-size:13px;color:var(--body-text);
+  padding:7px 0 7px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  position:relative;line-height:1.5;
+}
+.pkg-items li::before{
+  content:'—';position:absolute;left:0;
+  color:var(--terra);font-size:10px;top:9px;
+}
+.pkg-best{
+  font-size:10px;color:var(--sage);
+  font-style:italic;
+}
+.pkg-cta{
+  display:block;text-align:center;
+  margin-top:22px;padding:12px;
+  border:1px solid var(--border);
+  font-size:11px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--terra);
+  text-decoration:none;cursor:none;
+  transition:all 0.25s;
+}
+.pkg-cta:hover,.pkg-card.featured .pkg-cta{
+  background:var(--terra);color:#fff;
+  border-color:var(--terra);
+}
+.pricing-guarantee{
+  margin-top:60px;
+  padding:32px 40px;
+  background:rgba(190,142,111,0.06);
+  border:1px solid var(--border);
+  display:flex;align-items:center;
+  gap:32px;
+}
+.pg-icon{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;color:var(--terra);
+  flex-shrink:0;line-height:1;
+}
+.pg-text h3{
+  font-size:18px;font-weight:600;
+  color:#fff;margin-bottom:8px;
+}
+.pg-text p{
+  font-size:13px;color:var(--body-text);
+  line-height:1.75;
+}
+
+/* ════════════════════════════════════════
+   PROCESS SECTION
+════════════════════════════════════════ */
+#process{background:#0d0c09;}
+.process-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:end;margin-bottom:72px;
+}
+.process-header p{
+  font-size:14px;color:var(--body-text);
+  line-height:1.8;align-self:end;
+}
+.pipeline{
+  display:flex;align-items:center;
+  flex-wrap:wrap;gap:0;margin-bottom:60px;
+}
+.pipe-step{
+  display:flex;align-items:center;
+  flex-shrink:0;
+}
+.pipe-node{
+  padding:8px 16px;
+  background:var(--dark);
+  border:1px solid var(--border);
+  font-size:11px;color:var(--terra);
+  font-weight:500;letter-spacing:0.06em;
+  transition:all 0.3s;white-space:nowrap;
+}
+.pipe-node:hover{background:rgba(190,142,111,0.1);border-color:var(--terra);}
+.pipe-arrow{
+  color:rgba(190,142,111,0.3);
+  font-size:12px;padding:0 6px;flex-shrink:0;
+}
+.timeline-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,0.05);
+}
+.timeline-item{
+  background:#0d0c09;
+  padding:36px 28px;
+}
+.timeline-day{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--dark);
+  width:48px;height:48px;
+  font-size:10px;font-weight:700;
+  color:var(--terra);letter-spacing:0.06em;
+  margin-bottom:16px;
+}
+.timeline-title{
+  font-size:14px;font-weight:600;
+  color:#fff;margin-bottom:8px;
+}
+.timeline-desc{
+  font-size:12px;line-height:1.7;
+  color:rgba(255,255,255,0.38);
+}
+.reporting-row{
+  margin-top:56px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,0.05);
+}
+.report-item{
+  background:#0d0c09;padding:28px 24px;
+}
+.report-freq{
+  font-size:11px;font-weight:700;
+  color:var(--terra);letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.report-what{
+  font-size:12px;color:var(--body-text);
+  line-height:1.65;
+}
+
+/* ════════════════════════════════════════
+   NICHES SECTION
+════════════════════════════════════════ */
+#niches{background:var(--ink);}
+.niches-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:60px;
+}
+.niche-card{
+  padding:40px 30px;
+  border:1px solid rgba(255,255,255,0.06);
+  position:relative;overflow:hidden;
+  transition:all 0.35s;
+}
+.niche-card::before{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:2px;
+  background:var(--terra);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.4s;
+}
+.niche-card:hover::before{transform:scaleY(1);}
+.niche-card:hover{border-color:rgba(190,142,111,0.15);}
+.niche-icon{
+  width:48px;height:48px;
+  border:1px solid rgba(190,142,111,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:22px;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--terra);
+}
+.niche-name{
+  font-size:16px;font-weight:600;
+  color:#fff;margin-bottom:10px;
+}
+.niche-desc{
+  font-size:13px;color:var(--body-text);
+  line-height:1.7;
+}
+.niche-tag{
+  display:inline-block;margin-top:18px;
+  font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;padding:4px 10px;
+  background:rgba(190,142,111,0.1);
+  color:var(--terra);
+}
+
+/* ════════════════════════════════════════
+   OBJECTIONS SECTION
+════════════════════════════════════════ */
+#objections{
+  background:var(--dark);
+  padding:100px 0;
+}
+.obj-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:end;margin-bottom:56px;
+}
+.obj-header p{
+  font-size:14px;color:var(--body-text);
+  line-height:1.8;
+}
+.obj-list{display:flex;flex-direction:column;gap:0;}
+.obj-item{
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+}
+.obj-q{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding:24px 28px;cursor:none;
+  transition:background 0.25s;
+}
+.obj-q:hover{background:rgba(255,255,255,0.02);}
+.obj-q-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;
+  color:var(--sand);line-height:1.4;
+}
+.obj-toggle{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--terra);font-size:18px;flex-shrink:0;
+  margin-left:20px;transition:all 0.3s;
+}
+.obj-item.open .obj-toggle{
+  transform:rotate(45deg);
+  background:var(--terra);color:#fff;
+  border-color:var(--terra);
+}
+.obj-a{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.4s ease,padding 0.3s;
+  padding:0 28px;
+}
+.obj-item.open .obj-a{
+  max-height:200px;padding:0 28px 24px;
+}
+.obj-a p{
+  font-size:13px;color:var(--body-text);
+  line-height:1.85;
+}
+
+/* ════════════════════════════════════════
+   CTA BAND
+════════════════════════════════════════ */
+.cta-band{
+  background:var(--terra);padding:100px 0;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,0,0,0.1) 0%,transparent 60%);
+}
+.cta-band h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(40px,5.5vw,66px);
+  font-weight:300;color:#fff;
+  line-height:1.1;margin-bottom:16px;
+  position:relative;
+}
+.cta-band h2 em{font-style:italic;}
+.cta-band p{
+  font-size:16px;color:rgba(255,255,255,0.7);
+  margin-bottom:40px;position:relative;
+  max-width:480px;margin-left:auto;margin-right:auto;
+  line-height:1.7;
+}
+.cta-band .btn-white{
+  background:#fff;color:var(--terra);
+  padding:15px 40px;font-size:12px;
+  font-family:'Outfit',sans-serif;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  display:inline-block;position:relative;
+  transition:all 0.3s;border:2px solid #fff;
+}
+.cta-band .btn-white:hover{
+  background:transparent;color:#fff;
+}
+.cta-band .btn-outline-white{
+  background:transparent;color:#fff;
+  padding:15px 40px;font-size:12px;
+  font-family:'Outfit',sans-serif;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  text-decoration:none;cursor:none;
+  border:1px solid rgba(255,255,255,0.5);
+  display:inline-block;position:relative;
+  margin-left:16px;
+  transition:all 0.3s;
+}
+.cta-band .btn-outline-white:hover{
+  background:rgba(255,255,255,0.1);
+  border-color:#fff;
+}
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer{
+  background:var(--dark);
+  padding:64px 56px 40px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:56px;
+}
+.footer-brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;font-weight:400;
+  color:#fff;letter-spacing:0.18em;
+  margin-bottom:8px;
+}
+.footer-brand-sub{
+  font-size:9px;letter-spacing:0.2em;
+  color:var(--sage);text-transform:uppercase;
+  margin-bottom:16px;
+}
+.footer-bio{
+  font-size:12px;color:var(--muted);
+  line-height:1.75;max-width:240px;
+}
+.footer-col h4{
+  font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--terra);
+  margin-bottom:16px;
+}
+.footer-col a{
+  display:block;font-size:13px;
+  color:var(--muted);text-decoration:none;
+  cursor:none;margin-bottom:10px;
+  transition:color 0.2s;
+}
+.footer-col a:hover{color:var(--cream);}
+.footer-divider{
+  height:1px;background:rgba(255,255,255,0.07);
+  margin-bottom:32px;
+}
+.footer-bottom{
+  display:flex;justify-content:space-between;
+  align-items:center;
+}
+.footer-bottom p{
+  font-size:11px;color:rgba(255,255,255,0.2);
+}
+.footer-slogan{
+  font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.2);
+}
+
+/* WHATSAPP BUTTON */
+#wa-btn{
+  position:fixed;bottom:28px;right:28px;
+  z-index:200;width:54px;height:54px;
+  background:#25D366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;border:none;
+  box-shadow:0 4px 24px rgba(37,211,102,0.3);
+  transition:all 0.3s;
+}
+#wa-btn:hover{transform:scale(1.1);}
+.wa-pulse{
+  position:absolute;inset:0;border-radius:50%;
+  background:rgba(37,211,102,0.3);
+  animation:waPulse 2.5s ease-in-out infinite;
+}
+@keyframes waPulse{
+  0%,100%{transform:scale(1);opacity:0.5;}
+  50%{transform:scale(1.5);opacity:0;}
+}
+#wa-btn svg{width:26px;height:26px;fill:#fff;position:relative;z-index:1;}
+
+/* ════════════════════════════════════════
+   KEYFRAMES
+════════════════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .pkg-card{max-width:400px;margin:0 auto;}
+  .pricing-grid .pkg-card{max-width:100%;}
+  .process-header,.obj-header,.about-grid{grid-template-columns:1fr;gap:48px;}
+  .stats-block{max-width:400px;}
+}
+@media(max-width:900px){
+  nav{padding:18px 24px;}
+  nav.scrolled{padding:12px 24px;}
+  .container{padding:0 24px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  section{padding:90px 0;}
+  .services-grid,.niches-grid,.timeline-grid,.usp-grid{grid-template-columns:1fr 1fr;}
+  .reporting-row{grid-template-columns:1fr 1fr;}
+  footer{padding:48px 24px 32px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+}
+@media(max-width:600px){
+  section{padding:72px 0;}
+  .services-grid,.niches-grid,.timeline-grid,.usp-grid,
+  .addons-row,.reporting-row,.pricing-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:clamp(44px,14vw,72px);}
+  footer{padding:40px 20px 24px;}
+  .footer-grid{grid-template-columns:1fr;}
+  .pipeline{gap:4px;}
+  .cta-band{padding:72px 0;}
+  .cta-band .btn-outline-white{margin-left:0;margin-top:12px;}
+  .pricing-guarantee{flex-direction:column;gap:18px;padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">MUR<em>A</em>QBA</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#niches">Clients</a></li>
+    <li><a href="pricing.html">Full Menu</a></li>
+    <li><a href="proposal.html">Proposal</a></li>
+    <li><a href="contract.html">Agreement</a></li>
+  </ul>
+  <a href="https://wa.link/vgvozv" class="nav-cta" target="_blank">Work With Us</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#niches" onclick="closeMobile()">Clients</a>
+  <a href="pricing.html" onclick="closeMobile()">Full Menu</a>
+  <a href="proposal.html" onclick="closeMobile()">Proposal</a>
+  <a href="contract.html" onclick="closeMobile()">Agreement</a>
+  <a href="https://wa.link/vgvozv" target="_blank">Work With Us ↗</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Digital Marketing Agency · Pakistan</div>
+    <div class="hero-title">
+      MURAQBA
+      <span class="hero-title-accent">مراقبہ · Focused Awareness</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-slogan">We Observe &nbsp;·&nbsp; We Target &nbsp;·&nbsp; We Scale</div>
+    <div class="hero-actions">
+      <a href="https://wa.link/vgvozv" class="btn-primary" target="_blank">Start Growing Today</a>
+      <a href="proposal.html" class="btn-secondary">View Proposal</a>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-bar"></div>
+  </a>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>WE OBSERVE</span><span class="sep">◈</span>
+    <span>WE TARGET</span><span class="sep">◈</span>
+    <span>WE SCALE</span><span class="sep">◈</span>
+    <span>RESULTS FIRST</span><span class="sep">◈</span>
+    <span>FOCUSED STRATEGY</span><span class="sep">◈</span>
+    <span>REAL GROWTH</span><span class="sep">◈</span>
+    <span>PAY AFTER RESULTS</span><span class="sep">◈</span>
+    <span>WE OBSERVE</span><span class="sep">◈</span>
+    <span>WE TARGET</span><span class="sep">◈</span>
+    <span>WE SCALE</span><span class="sep">◈</span>
+    <span>RESULTS FIRST</span><span class="sep">◈</span>
+    <span>FOCUSED STRATEGY</span><span class="sep">◈</span>
+    <span>REAL GROWTH</span><span class="sep">◈</span>
+    <span>PAY AFTER RESULTS</span><span class="sep">◈</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="sec-label">01 — Who We Are</div>
+        <h2 class="sec-title">Focused.<br/>Intentional.<br/>Results-First.</h2>
+        <div class="sec-bar"></div>
+        <p><strong>MURAQBA (مراقبہ)</strong> is an Arabic-Urdu word meaning focused awareness — a state of deep, intentional observation and presence. We are a digital marketing agency built from Pakistan, built for the world.</p>
+        <p>We work specifically with <strong>women's clothing brands</strong> and <strong>digital product sellers</strong> who are ready to grow. Founded by a certified Full Stack Digital Marketer, our approach is built on precision, patience, and purpose.</p>
+        <div class="about-usp">
+          <p>"You only pay us after you see the results we promised."</p>
+        </div>
+        <div class="about-cta">
+          <a href="proposal.html" class="btn-primary">See How We Work</a>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="stats-block">
+          <div class="stat-cell">
+            <div class="stat-n">2026</div>
+            <div class="stat-l">Founded</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">100%</div>
+            <div class="stat-l">Results First</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">3</div>
+            <div class="stat-l">Markets</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">30<small style="font-size:22px;font-family:Outfit">d</small></div>
+            <div class="stat-l">Growth Roadmap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USP STRIP -->
+<div class="usp-strip">
+  <div class="container">
+    <div class="usp-grid">
+      <div class="usp-item reveal">
+        <div class="usp-icon">◉</div>
+        <div class="usp-name">Payment After Results</div>
+        <div class="usp-desc">Clients pay only after MURAQBA achieves the agreed milestone. 30% advance covers setup — 70% only when we deliver.</div>
+        <div class="usp-tag">Zero Financial Risk</div>
+      </div>
+      <div class="usp-item reveal" style="transition-delay:0.1s">
+        <div class="usp-icon">◈</div>
+        <div class="usp-name">7-Day Action Plan</div>
+        <div class="usp-desc">Every new client receives a customised 7-day plan on Day 1. A 30-day growth roadmap is delivered before any work begins.</div>
+        <div class="usp-tag">Day 1 Clarity</div>
+      </div>
+      <div class="usp-item reveal" style="transition-delay:0.2s">
+        <div class="usp-icon">▲</div>
+        <div class="usp-name">Personal Founder Access</div>
+        <div class="usp-desc">Every client gets direct access to the founder — not a junior account manager. Your brand treated as our own.</div>
+        <div class="usp-tag">Ownership Mentality</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-intro reveal">
+      <div class="sec-label">02 — What We Do</div>
+      <h2 class="sec-title">Services Built<br/>for Growth</h2>
+      <div class="sec-bar"></div>
+      <p>Every service is backed by our results-first model. We agree on a milestone, we do the work, and you pay only after we deliver.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Facebook & Instagram Ads</div>
+        <div class="svc-desc">Campaign setup, precision audience targeting, A/B tested creatives, weekly optimisation, and performance reports.</div>
+        <div class="svc-timeline">Ongoing / Monthly</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.07s">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Full Brand Setup</div>
+        <div class="svc-desc">Facebook page + Instagram profile, bio writing, highlights, cover design, link-in-bio — built from zero to polished.</div>
+        <div class="svc-timeline">3–5 Days</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.14s">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Content Creation</div>
+        <div class="svc-desc">12–16 posts/month, captions, hashtag research, content calendar, and stories tailored to your brand voice.</div>
+        <div class="svc-timeline">Monthly</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.04s">
+        <div class="svc-num">04</div>
+        <div class="svc-name">Lead Generation Campaigns</div>
+        <div class="svc-desc">Targeted ad campaigns generating real leads and inquiries — not just impressions. Every campaign optimised for your goal.</div>
+        <div class="svc-timeline">Ongoing</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.11s">
+        <div class="svc-num">05</div>
+        <div class="svc-name">Brand Roadmap</div>
+        <div class="svc-desc">7-day action plan + 30-day growth roadmap for new brands. Competitor analysis, audience profiling, priority checklist.</div>
+        <div class="svc-timeline">1–2 Days</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.18s">
+        <div class="svc-num">06</div>
+        <div class="svc-name">Brand Management</div>
+        <div class="svc-desc">Full ongoing management of your digital presence — content, ads, strategy, and monthly performance reviews.</div>
+        <div class="svc-timeline">Monthly</div>
+      </div>
+    </div>
+
+    <!-- Add-on services -->
+    <div class="reveal" style="margin-top:48px;">
+      <div class="sec-label" style="margin-bottom:20px;">Add-On Services</div>
+      <div class="addons-row">
+        <div class="addon-pill"><span class="addon-n">Extra Content Post</span><span class="addon-p">PKR 800/post</span></div>
+        <div class="addon-pill"><span class="addon-n">Reel / Short Video Edit</span><span class="addon-p">PKR 1,500/video</span></div>
+        <div class="addon-pill"><span class="addon-n">Extra Revision Round</span><span class="addon-p">PKR 500/round</span></div>
+        <div class="addon-pill"><span class="addon-n">Extra Strategy Call</span><span class="addon-p">PKR 1,000/call</span></div>
+        <div class="addon-pill"><span class="addon-n">Competitor Analysis Report</span><span class="addon-p">PKR 3,000 flat</span></div>
+        <div class="addon-pill"><span class="addon-n">Emergency 24hr Turnaround</span><span class="addon-p">PKR 2,000 flat</span></div>
+      </div>
+    </div>
+
+    <div class="services-cta reveal">
+      <p>Need a full service breakdown with all pricing details?</p>
+      <a href="pricing.html" class="btn-primary">View Full Pricing Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">03 — Investment</div>
+      <h2 class="sec-title">Packages & Pricing</h2>
+      <div class="sec-bar"></div>
+      <p class="pricing-note">30% advance at onboarding to cover setup. The remaining 70% is collected only after the agreed milestone is achieved and shown to you.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pkg-card reveal">
+        <div class="pkg-tier">Package 01</div>
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-price-pkr">PKR 15,000 / mo</div>
+        <div class="pkg-price-usd">≈ $54 USD / month</div>
+        <ul class="pkg-items">
+          <li>Brand setup (page + profile)</li>
+          <li>8 posts per month</li>
+          <li>Basic page management</li>
+          <li>Monthly performance snapshot</li>
+          <li>WhatsApp updates</li>
+        </ul>
+        <div class="pkg-best">Best for: New brands with zero online presence</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started</a>
+      </div>
+      <div class="pkg-card featured reveal" style="transition-delay:0.12s">
+        <div class="pkg-badge">Most Popular</div>
+        <div class="pkg-tier">Package 02</div>
+        <div class="pkg-name">Growth</div>
+        <div class="pkg-price-pkr">PKR 30,000 / mo</div>
+        <div class="pkg-price-usd">≈ $107 USD / month</div>
+        <ul class="pkg-items">
+          <li>16 posts per month</li>
+          <li>Facebook Ads (up to PKR 10k budget)</li>
+          <li>Monthly analytics report</li>
+          <li>30-day brand roadmap included</li>
+          <li>Bi-weekly updates</li>
+        </ul>
+        <div class="pkg-best">Best for: Brands ready to run ads</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started</a>
+      </div>
+      <div class="pkg-card reveal" style="transition-delay:0.24s">
+        <div class="pkg-tier">Package 03</div>
+        <div class="pkg-name">Scale</div>
+        <div class="pkg-price-pkr">PKR 55,000 / mo</div>
+        <div class="pkg-price-usd">≈ $197 USD / month</div>
+        <ul class="pkg-items">
+          <li>Everything in Growth</li>
+          <li>Lead generation campaigns</li>
+          <li>Full content calendar</li>
+          <li>Bi-weekly strategy calls</li>
+          <li>Monthly performance review</li>
+        </ul>
+        <div class="pkg-best">Best for: Serious brands wanting consistent leads</div>
+        <a href="https://wa.link/vgvozv" class="pkg-cta" target="_blank">Get Started</a>
+      </div>
+    </div>
+    <div class="pricing-guarantee reveal">
+      <div class="pg-icon">◈</div>
+      <div class="pg-text">
+        <h3>The MURAQBA Guarantee</h3>
+        <p>We operate on a results-first model. You pay a 30% advance to cover setup. The remaining 70% is only collected after we achieve the milestone we agreed on together. You see real results before you fully invest. That's our promise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="process-header">
+      <div class="reveal-left">
+        <div class="sec-label">04 — How It Works</div>
+        <h2 class="sec-title">Your First 7 Days</h2>
+        <div class="sec-bar"></div>
+      </div>
+      <div class="reveal-right">
+        <p>From the moment you sign with MURAQBA, the clock starts. Here's exactly what happens in your first week — no guessing, no waiting, no vague promises.</p>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="pipeline reveal" style="margin-bottom:56px;">
+      <div class="pipe-step"><div class="pipe-node">Cold DM</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Discovery Chat</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Proposal</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Goal Agreed</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Work Begins</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Results</div><div class="pipe-arrow">→</div></div>
+      <div class="pipe-step"><div class="pipe-node">Payment</div></div>
+    </div>
+
+    <div class="timeline-grid">
+      <div class="timeline-item reveal">
+        <div class="timeline-day">Day 1</div>
+        <div class="timeline-title">Onboarding Call</div>
+        <div class="timeline-desc">Brand assets collected, page access granted, milestone goal confirmed. Everything documented.</div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay:0.08s">
+        <div class="timeline-day">Day 2</div>
+        <div class="timeline-title">Brand Audit</div>
+        <div class="timeline-desc">Full review of your current presence. Gaps, strengths, and quick wins identified.</div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay:0.16s">
+        <div class="timeline-day">Day 3</div>
+        <div class="timeline-title">Roadmap Delivery</div>
+        <div class="timeline-desc">Your personalised 30-day growth roadmap and content strategy delivered for your approval.</div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay:0.06s">
+        <div class="timeline-day">Day 4–5</div>
+        <div class="timeline-title">Setup & Content</div>
+        <div class="timeline-desc">Pages optimised. First content batch created and sent for your review and approval.</div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay:0.14s">
+        <div class="timeline-day">Day 6</div>
+        <div class="timeline-title">Campaign Launch</div>
+        <div class="timeline-desc">First ad campaign live. Tracking, pixels, and reporting fully configured.</div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay:0.22s">
+        <div class="timeline-day">Day 7</div>
+        <div class="timeline-title">First Report</div>
+        <div class="timeline-desc">Performance snapshot delivered. You see exactly what's live and what's already working.</div>
+      </div>
+    </div>
+
+    <div class="reporting-row reveal" style="margin-top:48px;">
+      <div class="report-item">
+        <div class="report-freq">Every 3–4 Days</div>
+        <div class="report-what">WhatsApp update on ad performance or content status.</div>
+      </div>
+      <div class="report-item">
+        <div class="report-freq">Weekly</div>
+        <div class="report-what">Ad snapshot: reach, clicks, leads, cost per result.</div>
+      </div>
+      <div class="report-item">
+        <div class="report-freq">Bi-Weekly</div>
+        <div class="report-what">Content review: top posts, engagement, audience growth.</div>
+      </div>
+      <div class="report-item">
+        <div class="report-freq">Monthly</div>
+        <div class="report-what">Full campaign report + next month plan via WhatsApp + Google Sheet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NICHES -->
+<section id="niches">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-label">05 — Who We Work With</div>
+      <h2 class="sec-title">Our Clients<br/>& Markets</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="niches-grid">
+      <div class="niche-card reveal">
+        <div class="niche-icon">●</div>
+        <div class="niche-name">Women's Clothing Brands</div>
+        <div class="niche-desc">Online fashion brands — abayas, casual wear, formal, modest fashion, bridal wear. New and growing sellers on Instagram and Facebook across Pakistan and beyond.</div>
+        <div class="niche-tag">Primary Niche</div>
+      </div>
+      <div class="niche-card reveal" style="transition-delay:0.12s">
+        <div class="niche-icon">◈</div>
+        <div class="niche-name">Digital Product Sellers</div>
+        <div class="niche-desc">eBooks, online courses, Canva templates, coaching programs, and digital downloads. High-margin products with a strong need for lead generation and targeted advertising.</div>
+        <div class="niche-tag">Secondary Niche</div>
+      </div>
+      <div class="niche-card reveal" style="transition-delay:0.24s">
+        <div class="niche-icon">▲</div>
+        <div class="niche-name">Geographic Focus</div>
+        <div class="niche-desc"><strong style="color:#fff;">Primary:</strong> Pakistan — Lahore, Karachi, Islamabad.<br/><br/><strong style="color:#fff;">Secondary:</strong> UAE, Saudi Arabia, Qatar.<br/><br/><span style="color:var(--sage);">Future:</span> United Kingdom.</div>
+        <div class="niche-tag">Markets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS FAQ -->
+<section id="objections">
+  <div class="container">
+    <div class="obj-header">
+      <div class="reveal-left">
+        <div class="sec-label">06 — Common Questions</div>
+        <h2 class="sec-title">Objections<br/>Answered</h2>
+        <div class="sec-bar"></div>
+      </div>
+      <div class="reveal-right">
+        <p>We've heard every concern. Here are the honest answers to the questions every brand asks before working with us.</p>
+      </div>
+    </div>
+    <div class="obj-list reveal">
+      <div class="obj-item">
+        <div class="obj-q">
+          <div class="obj-q-text">"You're new, why should I trust you?"</div>
+          <div class="obj-toggle">+</div>
+        </div>
+        <div class="obj-a">
+          <p>That's a completely fair question. Yes, we're building our portfolio. That means you get what established agencies won't give: full personal attention, daily focus on your brand, and we only get paid when you actually see results. Zero financial risk. The only thing you're testing is whether our strategy works — and we're confident enough to put our payment on the line.</p>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">
+          <div class="obj-q-text">"Your price is too high."</div>
+          <div class="obj-toggle">+</div>
+        </div>
+        <div class="obj-a">
+          <p>What would one consistent lead per day be worth to your business this month? If our work brings you even 10 paying customers, does the fee still feel too high? And remember — you don't pay us until we hit the goal we agreed on. So the question isn't whether our price is high; it's whether the result is worth it.</p>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">
+          <div class="obj-q-text">"I tried ads before and lost money."</div>
+          <div class="obj-toggle">+</div>
+        </div>
+        <div class="obj-a">
+          <p>Most people who lost money were boosting posts randomly or working with someone who didn't understand their audience. We don't boost posts. We build proper campaigns with defined targeting, tested creatives, and a clear goal. Since you've already been burned once — you don't pay us anything until you see the result we agreed on. Your past experience is exactly why our model exists.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Ready to <em>grow?</em></h2>
+    <p>Let's build your brand together. No financial risk — you pay only after results.</p>
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:16px;position:relative;">
+      <a href="https://wa.link/vgvozv" class="btn-white" target="_blank">WhatsApp Us Now</a>
+      <a href="proposal.html" class="btn-outline-white">View Our Proposal</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">MURAQBA</div>
+        <div class="footer-brand-sub">مراقبہ · Focused Awareness</div>
+        <p class="footer-bio">A results-first digital marketing agency based in Kasur / Lahore, Pakistan. Built for clothing brands and digital product sellers who are ready to grow.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="pricing.html">Full Menu</a>
+      </div>
+      <div class="footer-col">
+        <h4>Documents</h4>
+        <a href="proposal.html">Client Proposal</a>
+        <a href="contract.html">Service Agreement</a>
+        <a href="#niches">Our Clients</a>
+        <a href="#process">Our Process</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:dearshanmushtaq@gmail.com">dearshanmushtaq@gmail.com</a>
+        <a href="https://instagram.com/muraqba" target="_blank">Instagram: @muraqba</a>
+        <a href="https://facebook.com/muraqbaads" target="_blank">Facebook: muraqbaads</a>
+        <a href="https://wa.link/vgvozv" target="_blank">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>© 2026 MURAQBA. All rights reserved. Kasur / Lahore, Pakistan.</p>
+      <div class="footer-slogan">WE OBSERVE · WE TARGET · WE SCALE</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<button id="wa-btn" onclick="window.open('https://wa.link/vgvozv','_blank')" title="Chat on WhatsApp" aria-label="WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<script>
+/* ── CURSOR ── */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+(function tick(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+/* ── MOBILE MENU ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', closeMobile);
+function closeMobile(){ mobileMenu.classList.remove('open'); }
+
+/* ── SCROLL REVEAL ── */
+const revEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revEls.forEach(el => observer.observe(el));
+
+/* ── ACCORDION ── */
+document.querySelectorAll('.obj-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.obj-item.open').forEach(i => i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
